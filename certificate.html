@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- favicon  -->
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/ml-favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/ml-favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/ml-favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Certificate Verification — ML Club, UU</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <style>
+
+    /* ── PAGE LAYOUT ── */
+    .cert-page {
+      min-height: 100vh;
+      padding: 8rem 2rem 6rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .cert-header {
+      text-align: center;
+      max-width: 620px;
+      margin-bottom: 3rem;
+      animation: fadeUp 0.6s ease both;
+    }
+    .cert-header .hero-tag { margin: 0 auto 1.2rem; }
+    .cert-header h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; margin-bottom: 0.75rem; }
+    .cert-header p  { color: var(--muted); font-size: 0.95rem; line-height: 1.75; }
+
+    /* ── SEARCH BOX ── */
+    .search-wrap {
+      width: 100%;
+      max-width: 600px;
+      margin-bottom: 3.5rem;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+    .search-box {
+      display: flex;
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: border-color 0.25s, box-shadow 0.25s;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    }
+    .search-box:focus-within {
+      border-color: var(--accent);
+      box-shadow: 0 4px 32px rgba(214,157,44,0.2);
+    }
+    .search-box input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      padding: 1.1rem 1.4rem;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--text);
+      letter-spacing: 0.04em;
+    }
+    .search-box input::placeholder { color: var(--muted); }
+    .search-box button {
+      padding: 0 2rem;
+      background: var(--accent);
+      border: none;
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #fff;
+      transition: background 0.2s;
+      white-space: nowrap;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .search-box button:hover { background: var(--accent-dark); }
+
+    .search-hint {
+      text-align: center;
+      margin-top: 0.75rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .search-hint code {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.15rem 0.5rem;
+      font-size: 0.75rem;
+      color: var(--accent);
+    }
+
+    /* ── RESULT AREA ── */
+    .result-area {
+      width: 100%;
+      max-width: 680px;
+      animation: fadeUp 0.5s ease both;
+    }
+
+    /* ── CERTIFICATE CARD ── */
+    .cert-card {
+      background: var(--surface);
+      border: 2px solid var(--accent);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 16px 48px rgba(214,157,44,0.2);
+    }
+
+    .cert-card-header {
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      padding: 1.2rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .cert-card-header .check-icon {
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,0.25);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+    .cert-card-header h3 {
+      font-family: var(--font-head);
+      font-size: 1rem; font-weight: 900;
+      color: #fff; margin: 0;
+    }
+    .cert-card-header span {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.8);
+      margin-left: auto;
+      background: rgba(255,255,255,0.15);
+      padding: 0.2rem 0.7rem;
+      border-radius: 100px;
+    }
+
+    /* The certificate image */
+    .cert-img-wrap {
+      position: relative;
+      background: var(--surface2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .cert-img-wrap img {
+      width: 100%;
+      max-width: 580px;
+      border-radius: 10px;
+      display: block;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+      object-fit: contain;
+    }
+    /* Loading spinner overlay */
+    .cert-img-wrap .img-spinner {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--surface2);
+      border-radius: 10px;
+      font-size: 2rem;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .cert-card-footer {
+      padding: 1.5rem 2rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .cert-meta { }
+    .cert-meta .cert-code {
+      font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); font-weight: 600; margin-bottom: 0.2rem;
+    }
+    .cert-meta .cert-filename {
+      font-size: 0.88rem; font-weight: 700; color: var(--text);
+    }
+
+    /* Download button */
+    .btn-download {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      padding: 0.75rem 1.8rem;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 50px;
+      font-family: var(--font-body);
+      font-size: 0.88rem; font-weight: 700;
+      text-decoration: none;
+      transition: all 0.25s;
+      box-shadow: 0 4px 16px rgba(214,157,44,0.35);
+      border: none; cursor: pointer;
+    }
+    .btn-download:hover {
+      background: var(--accent-dark);
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(214,157,44,0.45);
+    }
+    .btn-download .dl-icon { font-size: 1rem; }
+
+    /* ── NOT FOUND STATE ── */
+    .cert-not-found {
+      background: var(--surface);
+      border: 2px dashed var(--border);
+      border-radius: 20px;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+    .not-found-icon { font-size: 4rem; margin-bottom: 1.5rem; }
+    .cert-not-found h3 { font-size: 1.3rem; font-weight: 900; margin-bottom: 0.75rem; }
+    .cert-not-found p { color: var(--muted); font-size: 0.9rem; line-height: 1.75; max-width: 420px; margin: 0 auto; }
+    .cert-not-found .code-shown {
+      display: inline-block;
+      margin: 1rem 0;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.5rem 1.2rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: 0.08em;
+    }
+    .cert-not-found .help-text {
+      margin-top: 1.5rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    .cert-not-found .help-text a { color: var(--accent); }
+
+    /* ── IDLE STATE ── */
+    .cert-idle {
+      text-align: center;
+      padding: 3rem 2rem;
+      color: var(--muted);
+    }
+    .cert-idle .idle-icon { font-size: 3.5rem; margin-bottom: 1rem; opacity: 0.5; }
+    .cert-idle p { font-size: 0.88rem; }
+
+    /* ── HOW IT WORKS ── */
+    .how-it-works {
+      width: 100%; max-width: 680px;
+      margin-top: 5rem;
+      border-top: 1px solid var(--border);
+      padding-top: 3rem;
+    }
+    .hiw-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 1.2rem; margin-top: 1.5rem; }
+    .hiw-step { text-align: center; padding: 1.5rem 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; }
+    .hiw-num { width: 38px; height: 38px; border-radius: 50%; background: var(--accent); color: #fff; font-family: var(--font-head); font-size: 1rem; font-weight: 900; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.75rem; }
+    .hiw-step h4 { font-size: 0.88rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .hiw-step p  { font-size: 0.78rem; color: var(--muted); line-height: 1.55; }
+
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-icon"><img src="assets/ml-club-logo-main.jpg" alt="ML Club Logo" class="logo-img"></div>
+    <div class="nav-logo-text">
+      <span class="logo-main">ML Club, <span style="color:var(--accent)">UU</span></span>
+      <span class="logo-sub">Uttara University</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="courses.html">Courses</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="event.html">Events</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="certificate.html">Verify Certificate</a></li>
+    <li><a href="join.html" class="nav-cta">Join the Club</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="theme-toggle">🌙</button>
+    <div class="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- ── MAIN ── -->
+<div class="cert-page">
+
+  <!-- Header -->
+  <div class="cert-header">
+    <div class="hero-tag">🎓 Official Verification</div>
+    <h1>Certificate <span style="color:var(--accent)">Verification</span></h1>
+    <p>Enter the unique certificate code printed on your ML Club, UU certificate to instantly verify its authenticity and download a copy.</p>
+  </div>
+
+  <!-- Search -->
+  <div class="search-wrap">
+    <div class="search-box">
+      <input
+        type="text"
+        id="cert-input"
+        placeholder="Enter certificate code  e.g.  MLUU-2026-001"
+        autocomplete="off"
+        spellcheck="false"
+      />
+      <button onclick="verifyCertificate()">
+        🔍 Verify
+      </button>
+    </div>
+    <p class="search-hint">
+      The code is printed at the bottom of your certificate.
+      Example: <code>MLUU-2026-001</code> or simply the filename without extension.
+    </p>
+  </div>
+
+  <!-- Result -->
+  <div class="result-area" id="result-area">
+    <!-- Idle default state -->
+    <div class="cert-idle" id="state-idle">
+      <div class="idle-icon">📜</div>
+      <p>Your verified certificate will appear here.</p>
+    </div>
+  </div>
+
+  <!-- How it works -->
+  <div class="how-it-works">
+    <div class="section-label">How it works</div>
+    <div class="hiw-steps">
+      <div class="hiw-step"><div class="hiw-num">1</div><h4>Find your code</h4><p>Look at the bottom or back of your ML Club certificate for the unique code.</p></div>
+      <div class="hiw-step"><div class="hiw-num">2</div><h4>Type &amp; search</h4><p>Enter the code in the search box above and click Verify.</p></div>
+      <div class="hiw-step"><div class="hiw-num">3</div><h4>View &amp; download</h4><p>Your certificate is displayed. Click Download to save a copy.</p></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="nav-logo" style="text-decoration:none">
+        <div class="nav-logo-icon"><img src="assets/ml-club-logo-main.jpg" alt="ML Club Logo" class="logo-img"></div>
+        <div class="nav-logo-text">
+          <span class="logo-main">ML Club, <span style="color:var(--accent)">UU</span></span>
+          <span class="logo-sub">Uttara University</span>
+        </div>
+      </a>
+      <p>Machine Learning Club, Uttara University.</p>
+    </div>
+    <div class="footer-col"><h4>Learn</h4><ul><li><a href="courses.html">Courses</a></li><li><a href="projects.html">Projects</a></li><li><a href="blog.html">Blog</a></li></ul></div>
+    <div class="footer-col"><h4>Community</h4><ul><li><a href="event.html">Events</a></li><li><a href="join.html">Join the Club</a></li><li><a href="about.html">About</a></li></ul></div>
+    <div class="footer-col"><h4>Connect</h4><ul><li><a href="#">Facebook</a></li><li><a href="#">LinkedIn</a></li><li><a href="#">GitHub</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Machine Learning Club, Uttara University.</span>
+    <span>Made with ❤️ by ML Club, UU</span>
+  </div>
+</footer>
+
+<script src="scripts.js"></script>
+<script>
+  /* ══════════════════════════════════════════════════════════════
+     CERTIFICATE VERIFICATION LOGIC
+     
+     HOW IT WORKS:
+     - Certificates are stored as image files inside the "assets/certificates/" folder
+     - The filename (without extension) IS the certificate code
+     - Supported formats: .jpg, .jpeg, .png, .pdf (image preview for jpg/png)
+     
+     EXAMPLE folder structure:
+       assets/
+         certificates/
+           MLUU-2026-001.jpg
+           MLUU-2026-002.png
+           MLUU-2026-003.jpg
+           python-batch3-rafiul.jpg
+           ...
+     
+     TO ADD A NEW CERTIFICATE:
+     - Just drop the image file in  assets/certificates/
+     - The filename (e.g. "MLUU-2026-042") becomes the search code
+     - No code changes needed!
+  ══════════════════════════════════════════════════════════════ */
+
+  const CERT_FOLDER   = 'assets/certificates/';       // folder path (relative to HTML file)
+  const CERT_FORMATS  = ['jpg', 'jpeg', 'png'];        // supported image formats to try
+
+  const resultArea = document.getElementById('result-area');
+
+  /* Allow pressing Enter in the input */
+  document.getElementById('cert-input').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') verifyCertificate();
+  });
+
+  /* ── Main verify function ── */
+  function verifyCertificate() {
+    const raw   = document.getElementById('cert-input').value.trim();
+    const code  = raw.replace(/\s+/g, '-');   // normalise spaces → dashes
+
+    if (!code) {
+      shakeInput();
+      return;
+    }
+
+    showLoading(code);
+
+    /* Try each image format one by one */
+    tryFormats(code, CERT_FORMATS, 0);
+  }
+
+  /* ── Try loading image formats sequentially ── */
+  function tryFormats(code, formats, idx) {
+    if (idx >= formats.length) {
+      /* All formats failed */
+      showNotFound(code);
+      return;
+    }
+
+    const ext   = formats[idx];
+    const path  = CERT_FOLDER + code + '.' + ext;
+    const probe = new Image();
+
+    probe.onload  = () => showCertificate(code, path, ext);
+    probe.onerror = () => tryFormats(code, formats, idx + 1);
+    probe.src = path;
+  }
+
+  /* ── SHOW: loading ── */
+  function showLoading(code) {
+    resultArea.innerHTML = `
+      <div style="text-align:center;padding:3rem;color:var(--muted)">
+        <div style="font-size:2.5rem;animation:spin 1s linear infinite;display:inline-block">⏳</div>
+        <p style="margin-top:1rem;font-size:0.9rem">Looking up <strong style="color:var(--text)">${escHtml(code)}</strong>…</p>
+      </div>`;
+  }
+
+  /* ── SHOW: certificate found ── */
+  function showCertificate(code, imagePath, ext) {
+    resultArea.innerHTML = `
+      <div class="cert-card" id="cert-card">
+
+        <div class="cert-card-header">
+          <div class="check-icon">✅</div>
+          <h3>Certificate Verified</h3>
+          <span>✓ Authentic</span>
+        </div>
+
+        <div class="cert-img-wrap" id="cert-img-wrap">
+          <div class="img-spinner" id="img-spinner">⏳</div>
+          <img
+            id="cert-img"
+            src="${escAttr(imagePath)}"
+            alt="Certificate ${escAttr(code)}"
+            style="display:none"
+            onload="onCertImgLoad()"
+            onerror="onCertImgError()"
+          />
+        </div>
+
+        <div class="cert-card-footer">
+          <div class="cert-meta">
+            <div class="cert-code">Certificate Code</div>
+            <div class="cert-filename">${escHtml(code)}</div>
+          </div>
+          <a
+            href="${escAttr(imagePath)}"
+            download="${escAttr(code)}.${ext}"
+            class="btn-download"
+            id="dl-btn"
+          >
+            <span class="dl-icon">⬇️</span>
+            Download Certificate
+          </a>
+        </div>
+
+      </div>`;
+
+    /* Smooth scroll to result */
+    setTimeout(() => {
+      document.getElementById('cert-card')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 100);
+  }
+
+  /* ── SHOW: not found ── */
+  function showNotFound(code) {
+    resultArea.innerHTML = `
+      <div class="cert-not-found">
+        <div class="not-found-icon">🔍</div>
+        <h3>Certificate Not Found</h3>
+        <p>No certificate was found matching the code:</p>
+        <div class="code-shown">${escHtml(code)}</div>
+        <p>Please double-check the code on your certificate and try again. Codes are case-insensitive.</p>
+        <p class="help-text">
+          If you believe this is an error, please contact us at
+          <a href="mailto:mlclub@uu.edu.bd">mlclub@uu.edu.bd</a>
+          or reach out via our <a href="#">Facebook page</a>.
+        </p>
+      </div>`;
+
+    document.getElementById('result-area')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  /* ── Image loaded OK → hide spinner, show image ── */
+  function onCertImgLoad() {
+    document.getElementById('img-spinner')?.remove();
+    const img = document.getElementById('cert-img');
+    if (img) img.style.display = 'block';
+  }
+
+  /* ── Image failed to render even though probe succeeded (rare) ── */
+  function onCertImgError() {
+    const wrap = document.getElementById('cert-img-wrap');
+    if (wrap) {
+      wrap.innerHTML = `
+        <div style="padding:3rem;text-align:center;color:var(--muted)">
+          <div style="font-size:2.5rem;margin-bottom:1rem">📄</div>
+          <p style="font-size:0.88rem">Preview unavailable — use the Download button below to open the certificate.</p>
+        </div>`;
+    }
+  }
+
+  /* ── Helpers ── */
+  function escHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  function escAttr(str) { return escHtml(str); }
+
+  function shakeInput() {
+    const inp = document.getElementById('cert-input');
+    inp.style.outline = '2px solid #e11d48';
+    inp.placeholder = 'Please enter a certificate code first…';
+    setTimeout(() => { inp.style.outline = ''; inp.placeholder = 'Enter certificate code  e.g.  MLUU-2026-001'; }, 2000);
+  }
+
+  /* ── Case-insensitive: also try lowercase / uppercase variants ── */
+  const _origTryFormats = tryFormats;
+
+  /* Allow URL query param: certificate.html?code=MLUU-2026-001 */
+  (function checkUrlParam() {
+    const params = new URLSearchParams(window.location.search);
+    const code   = params.get('code') || params.get('id');
+    if (code) {
+      document.getElementById('cert-input').value = code;
+      verifyCertificate();
+    }
+  })();
+</script>
+</body>
+</html>

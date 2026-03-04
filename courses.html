@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- favicon  -->
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/ml-favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/ml-favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/ml-favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Courses — ML Club, UU</title>
@@ -12,13 +19,101 @@
     .path-header h3 { font-size:1.05rem; font-weight:700; }
     .path-steps { display:flex; gap:0.6rem; flex-wrap:wrap; }
     .path-step { padding:0.35rem 0.85rem; background:var(--surface2); border:1px solid var(--border); border-radius:6px; font-size:0.76rem; color:var(--muted); }
+
+    /* ── FILTER BUTTONS ── */
+    .course-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      align-items: center;
+      margin-bottom: 2.5rem;
+      padding: 1.25rem 1.4rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+
+    .filter-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.5rem 1.1rem;
+      border-radius: 50px;
+      border: 1.5px solid var(--border);
+      background: var(--surface2);
+      color: var(--muted);
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+      transition: all 0.22s ease;
+      white-space: nowrap;
+      user-select: none;
+    }
+    .filter-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(214, 157, 44, 0.07);
+      transform: translateY(-1px);
+    }
+    .filter-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(214, 157, 44, 0.35);
+      transform: translateY(-1px);
+    }
+    .filter-btn.active:hover {
+      background: var(--accent-dark);
+      border-color: var(--accent-dark);
+      color: #fff;
+    }
+
+    /* individual colour tints per category */
+    .filter-btn[data-cat="beginner"].active    { background:#16a34a; border-color:#16a34a; box-shadow:0 4px 14px rgba(22,163,74,0.3); }
+    .filter-btn[data-cat="intermediate"].active{ background:var(--accent); border-color:var(--accent); }
+    .filter-btn[data-cat="advanced"].active    { background:#be123c; border-color:#be123c; box-shadow:0 4px 14px rgba(190,18,60,0.3); }
+    .filter-btn[data-cat="nlp"].active         { background:#7c3aed; border-color:#7c3aed; box-shadow:0 4px 14px rgba(124,58,237,0.3); }
+    .filter-btn[data-cat="vision"].active      { background:#0891b2; border-color:#0891b2; box-shadow:0 4px 14px rgba(8,145,178,0.3); }
+
+    .filter-btn[data-cat="beginner"]:not(.active):hover    { border-color:#16a34a; color:#16a34a; background:rgba(22,163,74,0.07); }
+    .filter-btn[data-cat="advanced"]:not(.active):hover    { border-color:#be123c; color:#be123c; background:rgba(190,18,60,0.07); }
+    .filter-btn[data-cat="nlp"]:not(.active):hover         { border-color:#7c3aed; color:#7c3aed; background:rgba(124,58,237,0.07); }
+    .filter-btn[data-cat="vision"]:not(.active):hover      { border-color:#0891b2; color:#0891b2; background:rgba(8,145,178,0.07); }
+
+    /* Search input inside filters */
+    .course-search-wrap {
+      flex: 1;
+      min-width: 180px;
+      max-width: 280px;
+      margin-left: auto;
+    }
+    .course-search-wrap input {
+      width: 100%;
+      background: var(--surface2);
+      border: 1.5px solid var(--border);
+      border-radius: 50px;
+      padding: 0.5rem 1.1rem;
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .course-search-wrap input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(214,157,44,0.15);
+    }
   </style>
 </head>
 <body>
 
 <nav>
   <a href="index.html" class="nav-logo">
-    <div class="nav-logo-icon">🤖</div>
+    <div class="nav-logo-icon">
+      <img src="assets/ml-club-logo-main.jpg" alt="ML Club Logo" class="logo-img">
+    </div>
     <div class="nav-logo-text">
       <span class="logo-main">ML Club, <span style="color:var(--accent)">UU</span></span>
       <span class="logo-sub">Uttara University</span>
@@ -31,6 +126,7 @@
     <li><a href="event.html">Events</a></li>
     <li><a href="projects.html">Projects</a></li>
     <li><a href="about.html">About</a></li>
+    <li><a href="certificate.html">Verify Certificate</a></li>
     <li><a href="join.html" class="nav-cta">Join the Club</a></li>
   </ul>
   <div class="nav-right">
@@ -100,14 +196,14 @@
   <p class="section-sub">Click "Enroll" to fill out a quick Google Form and secure your spot in the next batch.</p>
 
   <div class="course-filters">
-    <button class="filter-btn active">All</button>
-    <button class="filter-btn">Beginner</button>
-    <button class="filter-btn">Intermediate</button>
-    <button class="filter-btn">Advanced</button>
-    <button class="filter-btn">NLP</button>
-    <button class="filter-btn">Computer Vision</button>
+    <button class="filter-btn active"              data-cat="all">⚡ All</button>
+    <button class="filter-btn"  data-cat="beginner">🟢 Beginner</button>
+    <button class="filter-btn"  data-cat="intermediate">🟡 Intermediate</button>
+    <button class="filter-btn"  data-cat="advanced">🔴 Advanced</button>
+    <button class="filter-btn"  data-cat="nlp">💬 NLP</button>
+    <button class="filter-btn"  data-cat="vision">👁️ Computer Vision</button>
     <div class="course-search-wrap">
-      <input id="course-search" type="text" placeholder="Search courses…"/>
+      <input id="course-search" type="text" placeholder="🔍  Search courses…"/>
     </div>
   </div>
 
@@ -211,7 +307,7 @@
   <div class="footer-grid">
     <div class="footer-brand">
       <a href="index.html" class="nav-logo" style="text-decoration:none">
-        <div class="nav-logo-icon">🤖</div>
+        <div class="nav-logo-icon"><img src="assets/ml-club-logo-main.jpg" alt="ML Club Logo" class="logo-img"></div>
         <div class="nav-logo-text">
           <span class="logo-main">ML Club, <span style="color:var(--accent)">UU</span></span>
           <span class="logo-sub">Uttara University</span>
@@ -220,11 +316,12 @@
       <p>Machine Learning Club, Uttara University.</p>
     </div>
     <div class="footer-col"><h4>Learn</h4><ul><li><a href="courses.html">Courses</a></li><li><a href="projects.html">Projects</a></li><li><a href="blog.html">Blog</a></li></ul></div>
-    <div class="footer-col"><h4>Community</h4><ul><li><a href="event.html">Events</a></li><li><a href="join.html">Join the Club</a></li><li><a href="about.html">About</a></li></ul></div>
+    <div class="footer-col"><h4>Community</h4><ul><li><a href="event.html">Events</a></li><li><a href="join.html">Join the Club</a></li><li><a href="about.html">About</a></li>
+    <li><a href="certificate.html">Verify Certificate</a></li></ul></div>
     <div class="footer-col"><h4>Connect</h4><ul><li><a href="#">Facebook</a></li><li><a href="#">LinkedIn</a></li><li><a href="#">GitHub</a></li></ul></div>
   </div>
   <div class="footer-bottom">
-    <span>© 2025 Machine Learning Club, Uttara University.</span>
+    <span>© 2026 Machine Learning Club, Uttara University.</span>
     <span>Made with ❤️ by ML Club, UU</span>
   </div>
 </footer>

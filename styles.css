@@ -57,6 +57,12 @@ a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
 a:hover { color: var(--accent-dark); }
 h1, h2, h3 { font-family: var(--font-head); line-height: 1.15; }
 
+/* Main logo style */
+.logo-img {
+  height: 40px;
+  width: auto;   /* keeps aspect ratio */
+}
+
 /* ── NAV ── */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 200;
