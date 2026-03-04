@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About — ML Club, UU</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <style>
+    .about-split { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; margin-bottom:5rem; }
+    @media(max-width:800px){ .about-split{ grid-template-columns:1fr; } }
+    .about-visual { border:1px solid var(--border); border-radius:16px; background:var(--surface); padding:3rem; text-align:center; position:relative; overflow:hidden; }
+    .about-visual::before { content:''; position:absolute; top:-60px; right:-60px; width:200px; height:200px; border-radius:50%; background:radial-gradient(circle,rgba(214,157,44,0.12),transparent 70%); }
+    .about-icon { font-size:4.5rem; margin-bottom:1rem; }
+    .about-visual p { color:var(--muted); font-size:0.88rem; line-height:1.75; }
+    .timeline { position:relative; padding-left:2.5rem; }
+    .timeline::before { content:''; position:absolute; left:0; top:0; bottom:0; width:2px; background:var(--border); }
+    .timeline-item { position:relative; margin-bottom:2.5rem; }
+    .timeline-dot { position:absolute; left:-2.85rem; top:5px; width:12px; height:12px; border-radius:50%; background:var(--accent); border:2px solid var(--bg); }
+    .timeline-year { font-size:0.7rem; color:var(--accent); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.3rem; font-weight:700; }
+    .timeline-item h3 { font-size:0.95rem; font-weight:700; margin-bottom:0.35rem; }
+    .timeline-item p { font-size:0.84rem; color:var(--muted); line-height:1.65; }
+    .values-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:1.5rem; }
+    .value-card { background:var(--card-bg); border:1px solid var(--border); border-radius:14px; padding:1.8rem; transition:border-color 0.3s; }
+    .value-card:hover { border-color:var(--accent); }
+    .value-icon { font-size:1.8rem; margin-bottom:0.75rem; }
+    .value-card h3 { font-size:0.93rem; font-weight:700; margin-bottom:0.4rem; }
+    .value-card p  { font-size:0.82rem; color:var(--muted); line-height:1.65; }
+    .team-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:1.5rem; }
+    .team-card { background:var(--card-bg); border:1px solid var(--border); border-radius:14px; padding:1.5rem; text-align:center; transition:border-color 0.3s; }
+    .team-card:hover { border-color:var(--accent); }
+    .team-avatar { width:64px; height:64px; border-radius:50%; margin:0 auto 1rem; display:flex; align-items:center; justify-content:center; font-size:1.4rem; font-weight:900; font-family:var(--font-head); }
+    .team-card h3 { font-size:0.92rem; font-weight:700; }
+    .team-card .role { font-size:0.78rem; color:var(--accent); margin-top:0.2rem; }
+    .team-card .dept { font-size:0.75rem; color:var(--muted); margin-top:0.15rem; }
+  </style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo"><div class="nav-logo-icon">🤖</div><div class="nav-logo-text"><span class="logo-main">ML Club, <span style="color:var(--accent)">UU</span></span><span class="logo-sub">Uttara University</span></div></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="courses.html">Courses</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="event.html">Events</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="join.html" class="nav-cta">Join the Club</a></li>
+  </ul>
+  <div class="nav-right"><button class="theme-toggle" id="theme-toggle">🌙</button><div class="hamburger"><span></span><span></span><span></span></div></div>
+</nav>
+
+<div class="page-hero">
+  <h1>About ML Club, UU</h1>
+  <p>A student-led community at Uttara University dedicated to AI and Machine Learning education.</p>
+</div>
+
+<section class="section">
+  <div class="about-split">
+    <div>
+      <div class="section-label">Our Mission</div>
+      <h2 class="section-title">AI Education for Every UU Student</h2>
+      <p style="color:var(--muted);font-size:0.92rem;line-height:1.8;margin-bottom:1.2rem">Machine Learning Club, Uttara University was founded with a simple belief: every student at UU — regardless of department — deserves access to quality AI education and a community that supports their growth.</p>
+      <p style="color:var(--muted);font-size:0.92rem;line-height:1.8;margin-bottom:1.5rem">We run free workshops, host hackathons, publish learning resources, and connect students with real-world ML opportunities. No fees, no barriers — just curiosity and community.</p>
+      <a href="join.html" class="btn btn-primary">Join Us Free →</a>
+    </div>
+    <div class="about-visual">
+      <div class="about-icon">🎓</div>
+      <p>A home for <strong style="color:var(--text)">320+ students</strong> from CSE, EEE, BBA, and every department at Uttara University — all united by curiosity about AI.</p>
+    </div>
+  </div>
+
+  <div class="section-label">Our Story</div>
+  <h2 class="section-title" style="margin-bottom:2.5rem">How we started</h2>
+  <div class="timeline">
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">Early 2023</div><h3>Founded by a handful of curious students</h3><p>A group of 8 CSE students started a WhatsApp group to share ML resources and help each other learn Python and data science.</p></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">Mid 2023</div><h3>First official workshop — 30 attendees</h3><p>Organized the first formal Python for ML workshop. The overwhelming response showed there was a real need at UU.</p></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">2024</div><h3>First Hackathon — 12 teams, 50+ participants</h3><p>Hosted UU's first ever ML hackathon. The winning team built a crop disease detector that got featured in local media.</p></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">2025</div><h3>320+ members, this website, and growing</h3><p>Now one of UU's most active student clubs — with a full curriculum, regular events, and members from every department.</p></div>
+  </div>
+
+  <hr class="divider" style="margin:4rem 0"/>
+  <div class="section-label">Values</div>
+  <h2 class="section-title" style="margin-bottom:2rem">What we stand for</h2>
+  <div class="values-grid">
+    <div class="value-card"><div class="value-icon">🔓</div><h3>Open Access</h3><p>All workshops and resources are free. Knowledge should have no barrier for UU students.</p></div>
+    <div class="value-card"><div class="value-icon">🤝</div><h3>Community First</h3><p>We grow together. Senior members mentor newcomers, no one is left behind.</p></div>
+    <div class="value-card"><div class="value-icon">🎯</div><h3>Hands-On Learning</h3><p>We build real things. Every workshop ends with code you wrote yourself.</p></div>
+    <div class="value-card"><div class="value-icon">🌍</div><h3>Local Impact</h3><p>We apply ML to solve real problems in Bangladesh — our hackathons are proof.</p></div>
+  </div>
+
+  <hr class="divider" style="margin:4rem 0"/>
+  <div class="section-label">Leadership</div>
+  <h2 class="section-title" style="margin-bottom:2rem">Executive Team 2025</h2>
+  <div class="team-grid">
+    <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff">MK</div><h3>Mehedi Khan</h3><div class="role">President</div><div class="dept">CSE 4th Year</div></div>
+    <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,#6d28d9,#7c3aed);color:#fff">FS</div><h3>Fatima Sultana</h3><div class="role">Vice President</div><div class="dept">EEE 3rd Year</div></div>
+    <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,#0891b2,#0e7490);color:#fff">RH</div><h3>Rafiul Hasan</h3><div class="role">Head of Workshops</div><div class="dept">CSE 3rd Year</div></div>
+    <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,#15803d,#166534);color:#fff">NA</div><h3>Nadia Akter</h3><div class="role">Head of Events</div><div class="dept">CSE 2nd Year</div></div>
+    <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,#be123c,#9f1239);color:#fff">TI</div><h3>Tanvir Islam</h3><div class="role">Head of Projects</div><div class="dept">CSE 4th Year</div></div>
+    <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,#b8841e,#d69d2c);color:#fff">SR</div><h3>Suma Rahman</h3><div class="role">Head of Media</div><div class="dept">BBA 3rd Year</div></div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand"><a href="index.html" class="nav-logo" style="text-decoration:none"><div class="nav-logo-icon">🤖</div><div class="nav-logo-text"><span class="logo-main">ML Club, <span style="color:var(--accent)">UU</span></span><span class="logo-sub">Uttara University</span></div></a><p>Machine Learning Club, Uttara University.</p></div>
+    <div class="footer-col"><h4>Learn</h4><ul><li><a href="courses.html">Courses</a></li><li><a href="projects.html">Projects</a></li><li><a href="blog.html">Blog</a></li></ul></div>
+    <div class="footer-col"><h4>Community</h4><ul><li><a href="event.html">Events</a></li><li><a href="join.html">Join the Club</a></li><li><a href="about.html">About</a></li></ul></div>
+    <div class="footer-col"><h4>Connect</h4><ul><li><a href="#">Facebook</a></li><li><a href="#">LinkedIn</a></li><li><a href="#">GitHub</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 Machine Learning Club, Uttara University.</span><span>Made with ❤️ by ML Club, UU</span></div>
+</footer>
+<script src="scripts.js"></script>
+</body>
+</html>

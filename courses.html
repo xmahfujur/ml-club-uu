@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Courses — ML Club, UU</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <style>
+    .path-section { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:2rem; margin-bottom:1.5rem; transition:border-color 0.3s; }
+    .path-section:hover { border-color:var(--accent); }
+    .path-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; flex-wrap:wrap; gap:0.5rem; }
+    .path-header h3 { font-size:1.05rem; font-weight:700; }
+    .path-steps { display:flex; gap:0.6rem; flex-wrap:wrap; }
+    .path-step { padding:0.35rem 0.85rem; background:var(--surface2); border:1px solid var(--border); border-radius:6px; font-size:0.76rem; color:var(--muted); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-icon">🤖</div>
+    <div class="nav-logo-text">
+      <span class="logo-main">ML Club, <span style="color:var(--accent)">UU</span></span>
+      <span class="logo-sub">Uttara University</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="courses.html" class="active">Courses</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="event.html">Events</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="join.html" class="nav-cta">Join the Club</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="theme-toggle">🌙</button>
+    <div class="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <h1>Courses & Workshops</h1>
+  <p>Structured learning paths taught by senior members and faculty — free for all UU students.</p>
+</div>
+
+<section class="section">
+
+  <!-- LEARNING PATHS -->
+  <div class="section-label">Learning Paths</div>
+  <h2 class="section-title">Pick your track</h2>
+  <p class="section-sub">Follow a curated sequence of workshops to master a specific area of ML.</p>
+
+  <div class="path-section">
+    <div class="path-header">
+      <h3>🐍 ML Foundations Track</h3>
+      <span class="badge badge-green">Beginner</span>
+    </div>
+    <div class="path-steps">
+      <span class="path-step">1. Python Basics</span>
+      <span class="path-step">2. NumPy & Pandas</span>
+      <span class="path-step">3. Supervised Learning</span>
+      <span class="path-step">4. Model Evaluation</span>
+      <span class="path-step">5. Mini Project</span>
+    </div>
+  </div>
+
+  <div class="path-section">
+    <div class="path-header">
+      <h3>🔥 Deep Learning Track</h3>
+      <span class="badge badge-gold">Intermediate</span>
+    </div>
+    <div class="path-steps">
+      <span class="path-step">1. Neural Networks</span>
+      <span class="path-step">2. CNNs & Image Data</span>
+      <span class="path-step">3. RNNs & Text</span>
+      <span class="path-step">4. Transformers</span>
+      <span class="path-step">5. Capstone Project</span>
+    </div>
+  </div>
+
+  <div class="path-section">
+    <div class="path-header">
+      <h3>🚀 Applied AI Track</h3>
+      <span class="badge badge-pink">Advanced</span>
+    </div>
+    <div class="path-steps">
+      <span class="path-step">1. LLMs & Prompting</span>
+      <span class="path-step">2. RAG Systems</span>
+      <span class="path-step">3. Model Deployment</span>
+      <span class="path-step">4. Real-World Project</span>
+    </div>
+  </div>
+
+  <hr class="divider" style="margin:3rem 0"/>
+
+  <!-- COURSES GRID -->
+  <div class="section-label">All Courses</div>
+  <h2 class="section-title">Browse all courses</h2>
+  <p class="section-sub">Click "Enroll" to fill out a quick Google Form and secure your spot in the next batch.</p>
+
+  <div class="course-filters">
+    <button class="filter-btn active">All</button>
+    <button class="filter-btn">Beginner</button>
+    <button class="filter-btn">Intermediate</button>
+    <button class="filter-btn">Advanced</button>
+    <button class="filter-btn">NLP</button>
+    <button class="filter-btn">Computer Vision</button>
+    <div class="course-search-wrap">
+      <input id="course-search" type="text" placeholder="Search courses…"/>
+    </div>
+  </div>
+
+  <div class="grid-3">
+
+    <div class="course-card">
+      <div class="course-thumb" style="background:linear-gradient(135deg,#fff8e6,#fce7b0)">🐍</div>
+      <div class="course-body">
+        <div class="course-meta"><span class="badge badge-green">Beginner</span><span class="badge badge-gold">Free</span></div>
+        <h3>Python for Machine Learning</h3>
+        <p>Learn NumPy, Pandas, and Matplotlib — the core stack every ML practitioner needs.</p>
+      </div>
+      <div class="course-footer">
+        <span><span class="rating">★★★★★</span> 4.9</span>
+        <span>8h · 6 weeks</span>
+        <!-- 🔗 Replace href with your Google Form link -->
+        <a href="https://forms.google.com/your-enroll-form" target="_blank" rel="noopener" class="btn btn-primary" style="padding:0.4rem 1rem;font-size:0.75rem">Enroll →</a>
+      </div>
+    </div>
+
+    <div class="course-card">
+      <div class="course-thumb" style="background:linear-gradient(135deg,#f8f0ff,#e8d0ff)">🧮</div>
+      <div class="course-body">
+        <div class="course-meta"><span class="badge badge-green">Beginner</span></div>
+        <h3>Math for ML: Linear Algebra & Stats</h3>
+        <p>Build the mathematical intuition behind every ML model — no advanced background needed.</p>
+      </div>
+      <div class="course-footer">
+        <span><span class="rating">★★★★☆</span> 4.7</span>
+        <span>10h · 8 weeks</span>
+        <a href="https://forms.google.com/your-enroll-form" target="_blank" rel="noopener" class="btn btn-primary" style="padding:0.4rem 1rem;font-size:0.75rem">Enroll →</a>
+      </div>
+    </div>
+
+    <div class="course-card">
+      <div class="course-thumb" style="background:linear-gradient(135deg,#e6fff0,#b0fcd0)">🌲</div>
+      <div class="course-body">
+        <div class="course-meta"><span class="badge badge-gold">Intermediate</span></div>
+        <h3>Supervised & Unsupervised Learning</h3>
+        <p>Decision trees, SVMs, k-means, PCA — theory and practical implementation with scikit-learn.</p>
+      </div>
+      <div class="course-footer">
+        <span><span class="rating">★★★★★</span> 4.8</span>
+        <span>14h · 8 weeks</span>
+        <a href="https://forms.google.com/your-enroll-form" target="_blank" rel="noopener" class="btn btn-primary" style="padding:0.4rem 1rem;font-size:0.75rem">Enroll →</a>
+      </div>
+    </div>
+
+    <div class="course-card">
+      <div class="course-thumb" style="background:linear-gradient(135deg,#fff0e6,#ffd0b0)">🔥</div>
+      <div class="course-body">
+        <div class="course-meta"><span class="badge badge-gold">Intermediate</span></div>
+        <h3>Deep Learning with PyTorch</h3>
+        <p>Build neural networks from scratch. Train CNNs, RNNs, and custom architectures.</p>
+      </div>
+      <div class="course-footer">
+        <span><span class="rating">★★★★★</span> 4.9</span>
+        <span>18h · 10 weeks</span>
+        <a href="https://forms.google.com/your-enroll-form" target="_blank" rel="noopener" class="btn btn-primary" style="padding:0.4rem 1rem;font-size:0.75rem">Enroll →</a>
+      </div>
+    </div>
+
+    <div class="course-card">
+      <div class="course-thumb" style="background:linear-gradient(135deg,#e6f4ff,#b0d8ff)">🤗</div>
+      <div class="course-body">
+        <div class="course-meta"><span class="badge badge-pink">Advanced</span><span class="badge badge-cyan">NLP</span></div>
+        <h3>Transformers & Large Language Models</h3>
+        <p>Attention, BERT, GPT, fine-tuning, RAG, and deploying LLMs in applications.</p>
+      </div>
+      <div class="course-footer">
+        <span><span class="rating">★★★★★</span> 5.0</span>
+        <span>22h · 12 weeks</span>
+        <a href="https://forms.google.com/your-enroll-form" target="_blank" rel="noopener" class="btn btn-primary" style="padding:0.4rem 1rem;font-size:0.75rem">Enroll →</a>
+      </div>
+    </div>
+
+    <div class="course-card">
+      <div class="course-thumb" style="background:linear-gradient(135deg,#f0e6ff,#d0b0ff)">👁️</div>
+      <div class="course-body">
+        <div class="course-meta"><span class="badge badge-gold">Intermediate</span><span class="badge badge-cyan">Vision</span></div>
+        <h3>Computer Vision with OpenCV & CNNs</h3>
+        <p>Image processing, object detection, face recognition, and segmentation — hands-on.</p>
+      </div>
+      <div class="course-footer">
+        <span><span class="rating">★★★★☆</span> 4.8</span>
+        <span>16h · 9 weeks</span>
+        <a href="https://forms.google.com/your-enroll-form" target="_blank" rel="noopener" class="btn btn-primary" style="padding:0.4rem 1rem;font-size:0.75rem">Enroll →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="background:var(--surface2);border:1px solid var(--border);border-radius:16px;padding:2rem;margin-top:2.5rem;text-align:center">
+    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1rem">New batches start every month. Enrolling via the form adds you to the waitlist for the next available session.</p>
+    <a href="join.html" class="btn btn-outline">Not a member yet? Join first →</a>
+  </div>
+
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="nav-logo" style="text-decoration:none">
+        <div class="nav-logo-icon">🤖</div>
+        <div class="nav-logo-text">
+          <span class="logo-main">ML Club, <span style="color:var(--accent)">UU</span></span>
+          <span class="logo-sub">Uttara University</span>
+        </div>
+      </a>
+      <p>Machine Learning Club, Uttara University.</p>
+    </div>
+    <div class="footer-col"><h4>Learn</h4><ul><li><a href="courses.html">Courses</a></li><li><a href="projects.html">Projects</a></li><li><a href="blog.html">Blog</a></li></ul></div>
+    <div class="footer-col"><h4>Community</h4><ul><li><a href="event.html">Events</a></li><li><a href="join.html">Join the Club</a></li><li><a href="about.html">About</a></li></ul></div>
+    <div class="footer-col"><h4>Connect</h4><ul><li><a href="#">Facebook</a></li><li><a href="#">LinkedIn</a></li><li><a href="#">GitHub</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Machine Learning Club, Uttara University.</span>
+    <span>Made with ❤️ by ML Club, UU</span>
+  </div>
+</footer>
+
+<script src="scripts.js"></script>
+</body>
+</html>

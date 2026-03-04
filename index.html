@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ML Club, UU — Machine Learning Club, Uttara University</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <style>
+    /* Index-specific */
+    .testimonial-wrap { display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:1.5rem; margin-top:2rem; }
+    .testimonial { background:var(--card-bg); border:1px solid var(--border); border-radius:16px; padding:2rem; transition:border-color 0.3s; }
+    .testimonial:hover { border-color:var(--accent); }
+    .testimonial p { font-size:0.88rem; color:var(--text2); font-style:italic; margin-bottom:1.2rem; line-height:1.75; }
+    .testi-author { display:flex; align-items:center; gap:0.75rem; }
+    .testi-avatar { width:42px; height:42px; border-radius:50%; background:var(--accent); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.85rem; color:#fff; }
+    .testi-name { font-size:0.87rem; font-weight:700; }
+    .testi-role { font-size:0.75rem; color:var(--muted); }
+
+    .cta-band {
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      padding: 5rem 3rem; text-align:center;
+    }
+    .cta-band h2 { font-size:clamp(1.8rem,3vw,2.6rem); font-weight:900; color:#fff; margin-bottom:0.75rem; }
+    .cta-band p { color:rgba(255,255,255,0.85); font-size:0.95rem; margin-bottom:2rem; }
+    .cta-band .btn-white { background:#fff; color:var(--accent-dark); }
+    .cta-band .btn-white:hover { background:var(--bg2); color:var(--accent-dark); }
+
+    .tech-strip { display:flex; flex-wrap:wrap; gap:0.75rem; align-items:center; padding:2.5rem 3rem; max-width:1200px; margin:0 auto; }
+    .tech-pill { padding:0.4rem 1rem; border:1.5px solid var(--border); border-radius:100px; font-size:0.78rem; font-weight:500; color:var(--muted); transition:all 0.2s; cursor:default; background:var(--surface2); }
+    .tech-pill:hover { border-color:var(--accent); color:var(--accent); background:rgba(214,157,44,0.06); }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-icon">🤖</div>
+    <div class="nav-logo-text">
+      <span class="logo-main">ML Club, <span style="color:var(--accent)">UU</span></span>
+      <span class="logo-sub">Uttara University</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="courses.html">Courses</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="event.html">Events</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="join.html" class="nav-cta">Join the Club</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="theme-toggle" title="Toggle theme">🌙</button>
+    <div class="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-tag">🎓 Uttara University · Est. 2023</div>
+  <h1>Machine Learning Club<br/><span class="hl">Uttara University</span></h1>
+  <p class="hero-sub">A student-led community where curious minds explore AI, build real projects, and grow together — right here at UU.</p>
+  <div class="hero-actions">
+    <a href="join.html" class="btn btn-primary">Join the Club →</a>
+    <a href="courses.html" class="btn btn-outline">Explore Courses</a>
+  </div>
+</section>
+
+<!-- ── STATS ── -->
+<div class="stats-bar">
+  <div><div class="stat-num" data-target="320" data-suffix="+">0</div><div class="stat-label">Members</div></div>
+  <div><div class="stat-num" data-target="48" data-suffix="+">0</div><div class="stat-label">Workshops</div></div>
+  <div><div class="stat-num" data-target="15" data-suffix="+">0</div><div class="stat-label">Projects</div></div>
+  <div><div class="stat-num" data-target="8" data-suffix="+">0</div><div class="stat-label">Expert Sessions</div></div>
+</div>
+
+<!-- ── TECH STRIP ── -->
+<div class="tech-strip">
+  <span class="tech-pill">Python</span>
+  <span class="tech-pill">TensorFlow</span>
+  <span class="tech-pill">PyTorch</span>
+  <span class="tech-pill">scikit-learn</span>
+  <span class="tech-pill">Hugging Face</span>
+  <span class="tech-pill">NumPy</span>
+  <span class="tech-pill">Pandas</span>
+  <span class="tech-pill">OpenCV</span>
+  <span class="tech-pill">Keras</span>
+  <span class="tech-pill">LangChain</span>
+</div>
+<hr class="divider"/>
+
+<!-- ── PHOTO SLIDER ── -->
+<div class="slider-section">
+  <div class="slider-inner">
+    <div class="slider-header">
+      <div class="section-label">Gallery</div>
+      <h2 class="section-title">Our Club in Action</h2>
+      <p class="section-sub">From workshops to hackathons — moments that define ML Club, UU.</p>
+    </div>
+
+    <div class="slider-track">
+      <div class="slider-viewport">
+        <div class="slider-slides">
+
+          <!-- Slide 1 -->
+          <div class="slide">
+            <div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1200&q=80')"></div>
+            <div class="slide-overlay"></div>
+            <div class="slide-caption">
+              <span class="slide-tag">Workshop</span>
+              <h3>Python for Machine Learning — Batch 3</h3>
+              <p>Hands-on session at the UU Computer Lab · February 2025</p>
+            </div>
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="slide">
+            <div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1200&q=80')"></div>
+            <div class="slide-overlay"></div>
+            <div class="slide-caption">
+              <span class="slide-tag">Seminar</span>
+              <h3>Deep Learning Seminar Series</h3>
+              <p>Guest lecture on Neural Networks · UU Auditorium · January 2025</p>
+            </div>
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="slide">
+            <div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=80')"></div>
+            <div class="slide-overlay"></div>
+            <div class="slide-caption">
+              <span class="slide-tag">Hackathon</span>
+              <h3>ML Hackathon 2024 — 24 Hours of Innovation</h3>
+              <p>12 teams, 50+ participants, 3 amazing projects · December 2024</p>
+            </div>
+          </div>
+
+          <!-- Slide 4 -->
+          <div class="slide">
+            <div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=1200&q=80')"></div>
+            <div class="slide-overlay"></div>
+            <div class="slide-caption">
+              <span class="slide-tag">Orientation</span>
+              <h3>New Member Orientation — Fall 2024</h3>
+              <p>Welcome to 85 new members joining ML Club, UU · October 2024</p>
+            </div>
+          </div>
+
+          <!-- Slide 5 -->
+          <div class="slide">
+            <div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=80')"></div>
+            <div class="slide-overlay"></div>
+            <div class="slide-caption">
+              <span class="slide-tag">Project Demo</span>
+              <h3>End-of-Semester Project Showcase</h3>
+              <p>Members presenting AI projects to faculty and industry guests · May 2024</p>
+            </div>
+          </div>
+
+          <!-- Slide 6 -->
+          <div class="slide">
+            <div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1200&q=80')"></div>
+            <div class="slide-overlay"></div>
+            <div class="slide-caption">
+              <span class="slide-tag">Training</span>
+              <h3>Computer Vision Crash Course</h3>
+              <p>Intensive one-day training on image classification · March 2024</p>
+            </div>
+          </div>
+
+        </div><!-- /slider-slides -->
+      </div><!-- /slider-viewport -->
+
+      <div class="slider-controls">
+        <div class="slider-dots"></div>
+        <div class="slider-arrows">
+          <button class="slider-arrow prev" aria-label="Previous">←</button>
+          <button class="slider-arrow next" aria-label="Next">→</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── FEATURES ── -->
+<section class="section">
+  <div class="section-label">Why Join Us?</div>
+  <h2 class="section-title">Everything we offer</h2>
+  <p class="section-sub">Whether you're just starting out or already coding neural networks — ML Club, UU has something for you.</p>
+  <div class="grid-3">
+    <div class="card">
+      <div class="card-icon">🧠</div>
+      <h3>Structured Learning</h3>
+      <p>Weekly workshops and study sessions — from Python basics to deep learning, guided by senior members and faculty.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">💻</div>
+      <h3>Hands-On Projects</h3>
+      <p>Work on real datasets, build portfolio projects, and solve problems that matter — not just textbook exercises.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🏆</div>
+      <h3>Competitions</h3>
+      <p>Participate in inter-university hackathons and Kaggle competitions as a team, with club support and mentorship.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎙️</div>
+      <h3>Guest Lectures</h3>
+      <p>Learn from industry professionals and researchers from Bangladesh's top tech companies and AI labs.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🤝</div>
+      <h3>Peer Community</h3>
+      <p>Study together, debug together, grow together. A supportive community of UU students who love AI.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📜</div>
+      <h3>Certificates & Recognition</h3>
+      <p>Earn workshop completion certificates and club recognition that strengthen your resume and career prospects.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section class="section" style="padding-top:0">
+  <div class="section-label">What Members Say</div>
+  <h2 class="section-title">Voices from the club</h2>
+  <div class="testimonial-wrap">
+    <div class="testimonial">
+      <p>"Joining ML Club was the best decision I made at UU. The workshops transformed me from knowing nothing about Python to building my own image classifier."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">RH</div>
+        <div><div class="testi-name">Rafiul Hasan</div><div class="testi-role">CSE 3rd Year, UU</div></div>
+      </div>
+    </div>
+    <div class="testimonial">
+      <p>"The hackathon experience was incredible. Our team built a Bengali text sentiment analyzer and won 2nd place. I never thought I could do that before joining."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">FS</div>
+        <div><div class="testi-name">Fatima Sultana</div><div class="testi-role">EEE 2nd Year, UU</div></div>
+      </div>
+    </div>
+    <div class="testimonial">
+      <p>"The community here is so supportive. Whenever I'm stuck, there's always someone to help. The guest lectures from industry people have opened my eyes."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">MK</div>
+        <div><div class="testi-name">Mehedi Khan</div><div class="testi-role">CSE 4th Year, UU</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA BAND ── -->
+<div class="cta-band">
+  <h2>Ready to start your AI journey?</h2>
+  <p>Membership is free for all Uttara University students. Fill out the form and join us today.</p>
+  <a href="join.html" class="btn btn-white">Join ML Club, UU →</a>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="nav-logo" style="text-decoration:none">
+        <div class="nav-logo-icon">🤖</div>
+        <div class="nav-logo-text">
+          <span class="logo-main">ML Club, <span style="color:var(--accent)">UU</span></span>
+          <span class="logo-sub">Uttara University</span>
+        </div>
+      </a>
+      <p>Machine Learning Club, Uttara University — a student community advancing AI education in Bangladesh.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Learn</h4>
+      <ul>
+        <li><a href="courses.html">Courses</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="blog.html">Blog</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Community</h4>
+      <ul>
+        <li><a href="event.html">Events</a></li>
+        <li><a href="join.html">Join the Club</a></li>
+        <li><a href="about.html">About Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#">LinkedIn</a></li>
+        <li><a href="#">GitHub</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Machine Learning Club, Uttara University. All rights reserved.</span>
+    <span>Made with ❤️ by ML Club, UU</span>
+  </div>
+</footer>
+
+<script src="scripts.js"></script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Projects — ML Club, UU</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <style>
+    .project-card { background:var(--card-bg); border:1px solid var(--border); border-radius:14px; overflow:hidden; transition:border-color 0.3s,transform 0.3s,box-shadow 0.3s; }
+    .project-card:hover { border-color:var(--accent); transform:translateY(-4px); box-shadow:var(--shadow); }
+    .project-banner { height:130px; display:flex; align-items:center; justify-content:center; font-size:3rem; }
+    .project-body { padding:1.5rem; }
+    .project-meta { display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:0.75rem; }
+    .project-body h3 { font-size:0.98rem; font-weight:700; margin-bottom:0.45rem; }
+    .project-body p  { font-size:0.83rem; color:var(--muted); line-height:1.65; margin-bottom:1rem; }
+    .project-footer { display:flex; justify-content:space-between; align-items:center; padding:1rem 1.5rem; border-top:1px solid var(--border); font-size:0.78rem; color:var(--muted); }
+    .proj-links { display:flex; gap:0.4rem; }
+    .proj-links a { padding:0.3rem 0.75rem; border:1px solid var(--border); border-radius:5px; font-size:0.72rem; color:var(--muted); transition:all 0.2s; }
+    .proj-links a:hover { border-color:var(--accent); color:var(--accent); }
+    .submit-box { background:linear-gradient(135deg,rgba(214,157,44,0.08),rgba(214,157,44,0.03)); border:2px dashed var(--accent); border-radius:16px; padding:3rem; text-align:center; margin-bottom:3.5rem; }
+    .submit-box h2 { font-size:1.4rem; font-weight:900; margin-bottom:0.5rem; }
+    .submit-box p { color:var(--muted); font-size:0.88rem; margin-bottom:1.5rem; }
+  </style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo"><div class="nav-logo-icon">🤖</div><div class="nav-logo-text"><span class="logo-main">ML Club, <span style="color:var(--accent)">UU</span></span><span class="logo-sub">Uttara University</span></div></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="courses.html">Courses</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="event.html">Events</a></li>
+    <li><a href="projects.html" class="active">Projects</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="join.html" class="nav-cta">Join the Club</a></li>
+  </ul>
+  <div class="nav-right"><button class="theme-toggle" id="theme-toggle">🌙</button><div class="hamburger"><span></span><span></span><span></span></div></div>
+</nav>
+
+<div class="page-hero">
+  <h1>Club Projects</h1>
+  <p>Real ML projects built by ML Club, Uttara University members — open source and portfolio-ready.</p>
+</div>
+
+<section class="section">
+  <div class="submit-box">
+    <h2>📤 Submit Your Project</h2>
+    <p>Built something with ML? Share it with the club and get it featured here.</p>
+    <a href="https://forms.google.com/your-project-form" target="_blank" rel="noopener" class="btn btn-primary">Submit via Google Form →</a>
+  </div>
+
+  <div class="course-filters" style="margin-bottom:2rem">
+    <button class="filter-btn active">All</button>
+    <button class="filter-btn">NLP</button>
+    <button class="filter-btn">Vision</button>
+    <button class="filter-btn">RL</button>
+    <button class="filter-btn">Generative</button>
+  </div>
+
+  <div class="grid-3">
+    <div class="project-card">
+      <div class="project-banner" style="background:linear-gradient(135deg,#fff8e6,#fce7b0)">💬</div>
+      <div class="project-body">
+        <div class="project-meta"><span class="badge badge-cyan">NLP</span><span class="badge badge-gold">Featured</span></div>
+        <h3>Bengali Sentiment Analyzer</h3>
+        <p>Fine-tuned BanglaBERT on social media data to detect sentiment in Bangla text. REST API deployed on Hugging Face Spaces.</p>
+        <div class="proj-links"><a href="#">GitHub</a><a href="#">Demo</a></div>
+      </div>
+      <div class="project-footer"><span>Team: Rafiul, Fatima, Mehedi</span><span>⭐ 42</span></div>
+    </div>
+    <div class="project-card">
+      <div class="project-banner" style="background:linear-gradient(135deg,#e6f4ff,#b0d8ff)">👁️</div>
+      <div class="project-body">
+        <div class="project-meta"><span class="badge badge-cyan">Vision</span></div>
+        <h3>Student Attendance via Face Recognition</h3>
+        <p>Automated classroom attendance using OpenCV and DeepFace. Tested at UU with 95% accuracy across 30 students.</p>
+        <div class="proj-links"><a href="#">GitHub</a></div>
+      </div>
+      <div class="project-footer"><span>Team: Tanvir, Nadia</span><span>⭐ 31</span></div>
+    </div>
+    <div class="project-card">
+      <div class="project-banner" style="background:linear-gradient(135deg,#f0e6ff,#d0b0ff)">🤖</div>
+      <div class="project-body">
+        <div class="project-meta"><span class="badge badge-purple">Generative</span></div>
+        <h3>Local RAG Chatbot for UU Handbook</h3>
+        <p>Q&A chatbot that answers questions about UU policies using LLaMA 3 + ChromaDB, running fully offline on a laptop.</p>
+        <div class="proj-links"><a href="#">GitHub</a><a href="#">Demo</a></div>
+      </div>
+      <div class="project-footer"><span>Team: Arif, Suma</span><span>⭐ 58</span></div>
+    </div>
+    <div class="project-card">
+      <div class="project-banner" style="background:linear-gradient(135deg,#e6fff0,#b0fcd0)">🌾</div>
+      <div class="project-body">
+        <div class="project-meta"><span class="badge badge-cyan">Vision</span></div>
+        <h3>Crop Disease Detection</h3>
+        <p>CNN trained on plant leaf images to detect common crop diseases in Bangladesh. Built as a mobile-friendly web app.</p>
+        <div class="proj-links"><a href="#">GitHub</a><a href="#">App</a></div>
+      </div>
+      <div class="project-footer"><span>Hackathon Winner 2024</span><span>⭐ 74</span></div>
+    </div>
+    <div class="project-card">
+      <div class="project-banner" style="background:linear-gradient(135deg,#fff0e6,#ffd0b0)">🎮</div>
+      <div class="project-body">
+        <div class="project-meta"><span class="badge badge-pink">RL</span></div>
+        <h3>Reinforcement Learning Tic-Tac-Toe Agent</h3>
+        <p>A Q-learning agent that learns to play Tic-Tac-Toe from scratch. Built as an educational project for the club workshop.</p>
+        <div class="proj-links"><a href="#">GitHub</a></div>
+      </div>
+      <div class="project-footer"><span>By: Mehedi Khan</span><span>⭐ 19</span></div>
+    </div>
+    <div class="project-card">
+      <div class="project-banner" style="background:linear-gradient(135deg,#ffeee6,#ffcfb0)">📈</div>
+      <div class="project-body">
+        <div class="project-meta"><span class="badge badge-gold">Data Science</span></div>
+        <h3>Stock Price Prediction with LSTM</h3>
+        <p>LSTM-based model trained on DSE (Dhaka Stock Exchange) data to forecast short-term price movements.</p>
+        <div class="proj-links"><a href="#">GitHub</a><a href="#">Report</a></div>
+      </div>
+      <div class="project-footer"><span>By: Rafiul Hasan</span><span>⭐ 27</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand"><a href="index.html" class="nav-logo" style="text-decoration:none"><div class="nav-logo-icon">🤖</div><div class="nav-logo-text"><span class="logo-main">ML Club, <span style="color:var(--accent)">UU</span></span><span class="logo-sub">Uttara University</span></div></a><p>Machine Learning Club, Uttara University.</p></div>
+    <div class="footer-col"><h4>Learn</h4><ul><li><a href="courses.html">Courses</a></li><li><a href="projects.html">Projects</a></li><li><a href="blog.html">Blog</a></li></ul></div>
+    <div class="footer-col"><h4>Community</h4><ul><li><a href="event.html">Events</a></li><li><a href="join.html">Join the Club</a></li><li><a href="about.html">About</a></li></ul></div>
+    <div class="footer-col"><h4>Connect</h4><ul><li><a href="#">Facebook</a></li><li><a href="#">LinkedIn</a></li><li><a href="#">GitHub</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 Machine Learning Club, Uttara University.</span><span>Made with ❤️ by ML Club, UU</span></div>
+</footer>
+<script src="scripts.js"></script>
+</body>
+</html>
