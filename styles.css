@@ -60,7 +60,7 @@ h1, h2, h3 { font-family: var(--font-head); line-height: 1.15; }
 /* Main logo style */
 .logo-img {
   height: 40px;
-  width: 40px;   /* keeps aspect ratio */
+  width: auto;   /* keeps aspect ratio */
 }
 
 /* ── NAV ── */
