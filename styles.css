@@ -385,3 +385,41 @@ tr:hover td { background: var(--surface2); }
   .hero h1 { font-size: 2rem; }
   .slide { height: 280px; }
 }
+
+
+/* inside project.html all, nlp , vission btn style */
+/* ── FILTER BUTTONS ── */
+
+.filter-btns{
+  display:flex;
+  flex-wrap:wrap;
+  gap:0.6rem;
+  margin-bottom:2rem;
+}
+
+.filter-btn{
+  padding:0.45rem 1.1rem;
+  border-radius:40px;
+  border:1.5px solid var(--border);
+  background:var(--surface);
+  color:var(--muted);
+  font-size:0.78rem;
+  font-weight:600;
+  cursor:pointer;
+  transition:all 0.25s ease;
+}
+
+/* hover */
+.filter-btn:hover{
+  border-color:var(--accent);
+  color:var(--accent);
+  transform:translateY(-1px);
+}
+
+/* active state */
+.filter-btn.active{
+  background:var(--accent);
+  border-color:var(--accent);
+  color:#fff;
+  box-shadow:0 4px 14px rgba(214,157,44,0.25);
+}
