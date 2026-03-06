@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>How Transformers Work in AI — ML Club, UU</title>
+  <link rel="stylesheet" href="../styles.css"/>
+  <style>
+    /* Article-specific styles */
+    .article-hero { padding: 6rem 3rem 3rem; background: linear-gradient(160deg, rgba(214,157,44,0.08) 0%, transparent 60%); border-bottom: 1px solid var(--border); }
+    .article-hero h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; margin-bottom: 1rem; }
+    .article-meta { display: flex; gap: 1.5rem; margin: 1.5rem 0; font-size: 0.85rem; color: var(--muted); flex-wrap: wrap; }
+    .article-meta span { display: flex; align-items: center; gap: 0.3rem; }
+    .toc-btn { background: var(--surface2); border: 1.5px solid var(--border); border-radius: 10px; padding: 0.6rem 1.2rem; cursor: pointer; font-weight: 600; color: var(--text); transition: all 0.2s; }
+    .toc-btn:hover { border-color: var(--accent); color: var(--accent); }
+    
+    .article-layout { display: grid; grid-template-columns: 1fr 250px; gap: 3rem; max-width: 1200px; margin: 0 auto; padding: 3rem; }
+    .article-content { }
+    .article-sidebar { position: sticky; top: 80px; }
+    
+    .section-heading { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 900; margin-top: 3rem; margin-bottom: 1.5rem; scroll-margin-top: 80px; }
+    .section-heading::before { content: '◆ '; color: var(--accent); font-size: 1.2em; }
+    
+    .subsection-heading { font-size: 1.15rem; font-weight: 700; margin-top: 2rem; margin-bottom: 1rem; color: var(--accent); }
+    .subsection-heading::before { content: '► '; font-size: 0.9em; }
+    
+    .article-content p { margin-bottom: 1.2rem; line-height: 1.85; color: var(--text2); font-size: 0.95rem; }
+    
+    .highlight-box { background: rgba(214,157,44,0.08); border-left: 4px solid var(--accent); padding: 1.5rem; border-radius: 8px; margin: 2rem 0; }
+    .highlight-box strong { color: var(--accent); }
+    
+    .code-block { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; margin: 2rem 0; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 0.85rem; color: var(--text); }
+    .code-block pre { margin: 0; }
+    
+    .visual-diagram { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; margin: 2rem 0; text-align: center; }
+    .diagram-label { font-weight: 700; color: var(--accent); margin-top: 1rem; font-size: 0.9rem; }
+    
+    .collapsible-section { margin: 2rem 0; }
+    .collapsible-header { background: var(--surface2); border: 1.5px solid var(--border); padding: 1rem 1.5rem; border-radius: 10px; cursor: pointer; font-weight: 600; color: var(--text); display: flex; justify-content: space-between; align-items: center; transition: all 0.3s; user-select: none; }
+    .collapsible-header:hover { border-color: var(--accent); background: rgba(214,157,44,0.05); }
+    .collapsible-header .icon { font-size: 1.2rem; transition: transform 0.3s; }
+    .collapsible-header.active .icon { transform: rotate(90deg); }
+    .collapsible-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; background: var(--surface2); border: 1.5px solid var(--border); border-top: none; border-radius: 0 0 10px 10px; }
+    .collapsible-content.active { max-height: 1500px; }
+    .collapsible-inner { padding: 1.5rem; }
+    
+    .key-concepts { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+    .concept-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; text-align: center; transition: all 0.3s; }
+    .concept-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--shadow); }
+    .concept-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
+    .concept-card h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--accent); }
+    .concept-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
+    
+    .comparison-table { width: 100%; border-collapse: collapse; margin: 2rem 0; background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+    .comparison-table th { background: rgba(214,157,44,0.1); padding: 1rem; text-align: left; font-weight: 700; color: var(--accent); border-bottom: 2px solid var(--border); }
+    .comparison-table td { padding: 1rem; border-bottom: 1px solid var(--border); color: var(--text2); }
+    .comparison-table tr:last-child td { border-bottom: none; }
+    .comparison-table tr:hover { background: rgba(214,157,44,0.04); }
+    
+    .toc-nav { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; }
+    .toc-nav h4 { font-size: 0.9rem; font-weight: 700; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+    .toc-nav ul { list-style: none; }
+    .toc-nav li { margin-bottom: 0.6rem; }
+    .toc-nav a { font-size: 0.85rem; color: var(--muted); transition: color 0.2s; text-decoration: none; display: flex; align-items: center; gap: 0.4rem; }
+    .toc-nav a:hover { color: var(--accent); }
+    
+    .step-flow { display: flex; gap: 1rem; margin: 2rem 0; overflow-x: auto; padding: 1rem 0; }
+    .step-item { min-width: 200px; background: var(--surface2); border: 1.5px solid var(--border); border-radius: 10px; padding: 1.5rem; text-align: center; }
+    .step-item .step-num { font-size: 2rem; font-weight: 900; color: var(--accent); margin-bottom: 0.5rem; }
+    .step-item p { font-size: 0.85rem; color: var(--muted); }
+    .step-item::after { display: block; content: '→'; position: absolute; right: -2rem; color: var(--border); font-size: 1.5rem; }
+    
+    .applications-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+    .app-card { background: var(--card-bg); border-left: 4px solid var(--accent); padding: 1.5rem; border-radius: 8px; }
+    .app-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+    .app-card h4 { font-weight: 700; margin-bottom: 0.5rem; font-size: 0.95rem; }
+    .app-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
+    
+    .cta-box { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); color: #fff; padding: 2rem; border-radius: 12px; margin: 3rem 0; text-align: center; }
+    .cta-box h3 { font-size: 1.4rem; margin-bottom: 0.75rem; }
+    .cta-box p { color: rgba(255,255,255,0.9); margin-bottom: 1.5rem; }
+    
+    @media (max-width: 960px) {
+      .article-layout { grid-template-columns: 1fr; }
+      .article-sidebar { position: static; }
+      .article-meta { flex-direction: column; gap: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="../index.html" class="nav-logo">
+    <div class="nav-logo-icon">
+      <img src="../assets/ml-club-logo-main.jpg" alt="ML Club Logo" class="logo-img">
+    </div>
+    <div class="nav-logo-text">
+      <span class="logo-main">ML Club, <span style="color:var(--accent)">UU</span></span>
+      <span class="logo-sub">Uttara University</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../courses.html">Courses</a></li>
+    <li><a href="../blog.html">Blog</a></li>
+    <li><a href="../event.html">Events</a></li>
+    <li><a href="../projects.html">Projects</a></li>
+    <li><a href="../about.html">About</a></li>
+    <li><a href="../join.html" class="nav-cta">Join the Club</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="theme-toggle" title="Toggle theme">🌙</button>
+    <div class="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- ── ARTICLE HERO ── -->
+<div class="article-hero">
+  <h1>How Transformers Work in AI</h1>
+  <p style="color:var(--muted);font-size:0.95rem;margin-top:0.75rem;">A deep dive into the revolutionary architecture that powers modern LLMs, GPT, BERT, and more.</p>
+  <div class="article-meta">
+    <span>Published: March 7, 2026</span>
+    <span>Read time: 12 minutes</span>
+    <span>Difficulty: Advanced</span>
+    <span>Author: Mahfujur Rahman, UU</span>
+  </div>
+  <button class="toc-btn" id="toggle-toc">📑 Toggle Table of Contents</button>
+</div>
+
+<!-- ── MAIN ARTICLE ── -->
+<div class="article-layout">
+  <div class="article-content">
+
+    <!-- 1. INTRODUCTION -->
+    <section id="introduction">
+      <h2 class="section-heading">Introduction: The Transformer Revolution</h2>
+      <p>In 2017, Vaswani et al. published the paper "Attention Is All You Need," introducing the Transformer architecture. Since then, it has become the foundation for nearly every state-of-the-art AI model: ChatGPT, Claude, Gemini, BERT, and thousands more.</p>
+      <p>But what makes Transformers so powerful? Why did they replace recurrent neural networks (RNNs) and LSTMs? And how do they actually work under the hood?</p>
+      <div class="highlight-box">
+        <strong>Key Insight:</strong> Transformers use a mechanism called <em>self-attention</em> to process all words in a sequence simultaneously, allowing them to capture long-range dependencies much better than older models.
+      </div>
+    </section>
+
+    <!-- 2. THE PROBLEM TRANSFORMERS SOLVED -->
+    <section id="problem">
+      <h2 class="section-heading">The Problem: Sequential Processing is Slow</h2>
+      <h3 class="subsection-heading">Why RNNs Failed</h3>
+      <p>Before Transformers, the gold standard for processing sequences (text, time-series) was Recurrent Neural Networks (RNNs). But RNNs had a critical flaw:</p>
+      <ul style="margin-left:1.5rem;margin-bottom:1.5rem;">
+        <li><strong>Sequential Processing:</strong> RNNs process one word at a time, left to right. Word 10 depends on words 1–9, so you can't parallelize.</li>
+        <li><strong>Vanishing Gradients:</strong> Gradients exponentially shrink over long sequences, making it hard to learn long-range dependencies.</li>
+        <li><strong>Slow Training:</strong> Can't leverage GPUs efficiently because of sequential computation.</li>
+      </ul>
+      <p>For a 1000-word document, an RNN takes ~1000 timesteps. A Transformer can process all 1000 words in parallel.</p>
+    </section>
+
+    <!-- 3. CORE CONCEPTS -->
+    <section id="concepts">
+      <h2 class="section-heading">Core Concepts: What is Attention?</h2>
+      <h3 class="subsection-heading">Attention Mechanism</h3>
+      <p>The heart of Transformers is <strong>attention</strong>. Think of it like this: when you read a sentence, you don't process every word equally. You focus on (pay attention to) words that are relevant to understanding the current word.</p>
+      <p>Attention computes a weighted combination of all input words. It asks: "How much should I focus on each word when processing this word?"</p>
+      
+      <div class="highlight-box">
+        <strong>Example:</strong> In "The cat sat on the mat," when processing "sat," the model learns to pay high attention to "cat" and "mat," and low attention to "the."
+      </div>
+
+      <h3 class="subsection-heading">Self-Attention (Scaled Dot-Product Attention)</h3>
+      <p>Self-attention compares each word to <em>every other word</em> in the sequence. For each word, it computes:</p>
+      <div class="code-block"><pre>Attention(Q, K, V) = softmax(QK^T / √d_k) V
+
+Where:
+  Q = Query: What am I looking for?
+  K = Key: What are the candidate matches?
+  V = Value: What do I extract if matched?</pre></div>
+      
+      <p>In simple terms: For each word (query), the model compares it to all other words (keys) to decide what to attend to, then extracts information (values) from the attended words.</p>
+
+      <div class="key-concepts">
+        <div class="concept-card">
+          <div class="concept-icon">🔍</div>
+          <h4>Query (Q)</h4>
+          <p>Represents the current word asking what to look for.</p>
+        </div>
+        <div class="concept-card">
+          <div class="concept-icon">🗝️</div>
+          <h4>Key (K)</h4>
+          <p>Properties of each word to compare against the query.</p>
+        </div>
+        <div class="concept-card">
+          <div class="concept-icon">📦</div>
+          <h4>Value (V)</h4>
+          <p>The information to extract from each word.</p>
+        </div>
+        <div class="concept-card">
+          <div class="concept-icon">⚖️</div>
+          <h4>Softmax</h4>
+          <p>Normalizes attention scores into probabilities.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. MULTI-HEAD ATTENTION -->
+    <section id="multihead">
+      <h2 class="section-heading">Multi-Head Attention: Parallel Perspectives</h2>
+      <p>Transformers don't use a single attention operation. Instead, they use multiple "heads" of attention running in parallel, each focusing on different aspects of the data.</p>
+      <p>With 8 heads, each head might learn to:</p>
+      <ul style="margin-left:1.5rem;margin-bottom:1.5rem;">
+        <li>Head 1: Focus on grammatical relationships</li>
+        <li>Head 2: Track named entities (people, places)</li>
+        <li>Head 3: Capture word meanings</li>
+        <li>... and so on</li>
+      </ul>
+      <p>After computing all heads, outputs are concatenated and linearly transformed.</p>
+      <div class="visual-diagram">
+        <div style="font-size:0.9rem;line-height:1.8;color:var(--muted);">
+          <strong style="color:var(--accent);">Multi-Head Attention Flow</strong><br/>
+          Input → [Head 1] → Output 1<br/>
+          Input → [Head 2] → Output 2<br/>
+          Input → [Head 3] → Output 3<br/>
+          ...<br/>
+          Concat → Linear → Final Output
+        </div>
+        <p class="diagram-label">Multiple heads attend to different aspects simultaneously, then combine results.</p>
+      </div>
+    </section>
+
+    <!-- 5. TRANSFORMER ARCHITECTURE -->
+    <section id="architecture">
+      <h2 class="section-heading">Transformer Architecture: Full Design</h2>
+      <p>A complete Transformer consists of layers stacked on top of each other. Each layer has two main components:</p>
+      
+      <div class="collapsible-section">
+        <div class="collapsible-header">
+          <span>1️⃣ Multi-Head Self-Attention</span>
+          <span class="icon">▶</span>
+        </div>
+        <div class="collapsible-content">
+          <div class="collapsible-inner">
+            <p>All words attend to all words simultaneously. This is where the model learns which words are related to which.</p>
+            <div class="code-block"><pre>MultiHeadAttention(X) = Concat(head_1, ..., head_h) W^O
+where head_i = Attention(X W_i^Q, X W_i^K, X W_i^V)</pre></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="collapsible-section">
+        <div class="collapsible-header">
+          <span>2️⃣ Feed-Forward Network</span>
+          <span class="icon">▶</span>
+        </div>
+        <div class="collapsible-content">
+          <div class="collapsible-inner">
+            <p>A simple 2-layer neural network applied to each word independently. Adds non-linearity and feature transformation.</p>
+            <div class="code-block"><pre>FFN(x) = ReLU(x W_1 + b_1) W_2 + b_2</pre></div>
+            <p>Typical dimensions: 512 → 2048 → 512</p>
+          </div>
+        </div>
+      </div>
+
+      <p style="margin-top:2rem;"><strong>Each Layer Also Includes:</strong></p>
+      <ul style="margin-left:1.5rem;margin-bottom:1.5rem;">
+        <li><strong>Layer Normalization:</strong> Stabilizes training and helps gradients flow</li>
+        <li><strong>Residual Connections:</strong> Skip connections allow gradients to flow directly</li>
+        <li><strong>Dropout:</strong> Prevents overfitting</li>
+      </ul>
+
+      <div class="visual-diagram">
+        <div style="font-size:0.85rem;line-height:2;color:var(--muted);font-family:monospace;">
+          <strong style="color:var(--accent);">One Transformer Block</strong><br/>
+          ┌─────────────────┐<br/>
+          │    Input (X)    │<br/>
+          └────────┬────────┘<br/>
+          ┌────────▼────────┐<br/>
+          │   LayerNorm    │<br/>
+          └────────┬────────┘<br/>
+          ┌────────▼────────────────────┐<br/>
+          │  Multi-Head Attention       │<br/>
+          └────────┬────────────────────┘<br/>
+          ┌────────▼────────┐ (Residual)<br/>
+          │  + X (skip)     │<br/>
+          └────────┬────────┘<br/>
+          ┌────────▼────────┐<br/>
+          │   LayerNorm    │<br/>
+          └────────┬────────┘<br/>
+          ┌────────▼────────────────────┐<br/>
+          │   Feed-Forward Network      │<br/>
+          └────────┬────────────────────┘<br/>
+          ┌────────▼────────┐ (Residual)<br/>
+          │  + Prev (skip)  │<br/>
+          └────────┬────────┘<br/>
+          ┌────────▼────────┐<br/>
+          │   Output (Y)    │<br/>
+          └─────────────────┘
+        </div>
+        <p class="diagram-label">A single Transformer encoder block with attention, residual connections, and feed-forward.</p>
+      </div>
+    </section>
+
+    <!-- 6. ENCODER vs DECODER -->
+    <section id="encoder-decoder">
+      <h2 class="section-heading">Encoder vs Decoder: Two Halves of Power</h2>
+      <table class="comparison-table">
+        <tr>
+          <th>Aspect</th>
+          <th>Encoder</th>
+          <th>Decoder</th>
+        </tr>
+        <tr>
+          <td><strong>Purpose</strong></td>
+          <td>Encodes entire input sequence at once</td>
+          <td>Generates output one token at a time</td>
+        </tr>
+        <tr>
+          <td><strong>Attention</strong></td>
+          <td>Self-attention: attends to all input tokens</td>
+          <td>Self-attention (future tokens masked) + Cross-attention to encoder</td>
+        </tr>
+        <tr>
+          <td><strong>Examples</strong></td>
+          <td>BERT (masked LM), RoBERTa, DistilBERT</td>
+          <td>GPT, Llama, Claude (auto-regressive LM)</td>
+        </tr>
+        <tr>
+          <td><strong>Use Case</strong></td>
+          <td>Classification, understanding, embeddings</td>
+          <td>Text generation, translation, summarization</td>
+        </tr>
+        <tr>
+          <td><strong>Speed</strong></td>
+          <td>Fast (parallel processing)</td>
+          <td>Slower (sequential token generation)</td>
+        </tr>
+      </table>
+
+      <h3 class="subsection-heading">Encoder-Only (BERT-style)</h3>
+      <p>Bidirectional: Each token can attend to all other tokens. Great for understanding tasks but can't generate text directly.</p>
+
+      <h3 class="subsection-heading">Decoder-Only (GPT-style)</h3>
+      <p>Autoregressive: Each token only attends to previous tokens. Naturally generates text left-to-right.</p>
+
+      <h3 class="subsection-heading">Encoder-Decoder (T5, Seq2Seq)</h3>
+      <p>Encoder processes input, decoder generates output while attending to encoder output. Excel at translation, summarization.</p>
+    </section>
+
+    <!-- 7. POSITIONAL ENCODING -->
+    <section id="positional">
+      <h2 class="section-heading">Positional Encoding: Teaching Position Order</h2>
+      <p>Transformers process all tokens in parallel, so they initially don't know <em>position</em>. Two words at positions 5 and 100 look the same to the model initially.</p>
+      <p><strong>Solution: Positional Encoding</strong> — Add position information to each token embedding.</p>
+      <div class="code-block"><pre>PE(pos, 2i)   = sin(pos / 10000^(2i/d_model))
+PE(pos, 2i+1) = cos(pos / 10000^(2i/d_model))</pre></div>
+      <p>These sine/cosine patterns give each position a unique "fingerprint." The model learns that nearby positions have similar encodings, far positions have different encodings.</p>
+    </section>
+
+    <!-- 8. HOW DATA FLOWS -->
+    <section id="data-flow">
+      <h2 class="section-heading">Step-by-Step: How Data Flows Through a Transformer</h2>
+      
+      <div class="step-flow">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <p><strong>Tokenization</strong><br/>Text → Tokens<br/>"Hello world" → [188, 1686]</p>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <p><strong>Embedding</strong><br/>Tokens → Vectors<br/>d_model = 512 dims</p>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <p><strong>Positional Encoding</strong><br/>Add position info to embeddings</p>
+        </div>
+        <div class="step-item">
+          <div class="step-num">4</div>
+          <p><strong>Encoder Layer 1</strong><br/>Self-attention + FFN</p>
+        </div>
+        <div class="step-item">
+          <div class="step-num">5</div>
+          <p><strong>Encoder Layers 2-12</strong><br/>Repeat (12 layers in GPT-3)</p>
+        </div>
+      </div>
+
+      <div style="margin-top:2rem;padding:1.5rem;background:var(--surface2);border:1px solid var(--border);border-radius:10px;">
+        <p style="font-size:0.9rem;color:var(--muted);"><strong>For Decoder (Generation):</strong> The decoder generates one token at a time. At each step, it attends to its own previous output (masked) and the encoder output (for encoder-decoder models).</p>
+      </div>
+    </section>
+
+    <!-- 9. APPLICATIONS -->
+    <section id="applications">
+      <h2 class="section-heading">Real-World Applications</h2>
+      <div class="applications-grid">
+        <div class="app-card">
+          <div class="app-icon">💬</div>
+          <h4>Large Language Models</h4>
+          <p>GPT-4, Claude, Gemini. Pure decoder architectures generating human-like text.</p>
+        </div>
+        <div class="app-card">
+          <div class="app-icon">🎨</div>
+          <h4>Image Generation</h4>
+          <p>Diffusion models use Transformers to model the denoising process. DALL-E, Midjourney.</p>
+        </div>
+        <div class="app-card">
+          <div class="app-icon">🌐</div>
+          <h4>Machine Translation</h4>
+          <p>Google Translate. Encoder-decoder architecture translates text from one language to another.</p>
+        </div>
+        <div class="app-card">
+          <div class="app-icon">😊</div>
+          <h4>Sentiment Analysis</h4>
+          <p>Classify emotions in text. BERT-based models are state-of-the-art.</p>
+        </div>
+        <div class="app-card">
+          <div class="app-icon">🔍</div>
+          <h4>Search & Ranking</h4>
+          <p>Transformers embed queries and documents, enabling semantic search.</p>
+        </div>
+        <div class="app-card">
+          <div class="app-icon">🎵</div>
+          <h4>Speech Recognition</h4>
+          <p>Transformers process audio spectrograms in parallel, faster than RNNs.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. ADVANTAGES & DISADVANTAGES -->
+    <section id="pros-cons">
+      <h2 class="section-heading">Advantages vs Disadvantages</h2>
+      
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin:2rem 0;">
+        <div style="padding:1.5rem;background:rgba(34,197,94,0.08);border-left:4px solid #15803d;border-radius:8px;">
+          <h4 style="color:#15803d;margin-bottom:1rem;font-size:1rem;">✅ Advantages</h4>
+          <ul style="list-style:none;padding:0;">
+            <li style="margin-bottom:0.75rem;color:var(--text2);"><strong>Parallelizable:</strong> All tokens processed simultaneously → much faster training</li>
+            <li style="margin-bottom:0.75rem;color:var(--text2);"><strong>Long-range dependencies:</strong> Self-attention handles long documents easily</li>
+            <li style="margin-bottom:0.75rem;color:var(--text2);"><strong>Transferable:</strong> Pre-trained models transfer well to downstream tasks</li>
+            <li style="margin-bottom:0.75rem;color:var(--text2);"><strong>Interpretable:</strong> Attention weights can explain model decisions</li>
+            <li style="color:var(--text2);"><strong>Scalable:</strong> Scales to billions of parameters with impressive emergent capabilities</li>
+          </ul>
+        </div>
+        <div style="padding:1.5rem;background:rgba(244,63,94,0.08);border-left:4px solid #be123c;border-radius:8px;">
+          <h4 style="color:#be123c;margin-bottom:1rem;font-size:1rem;">⚠️ Disadvantages</h4>
+          <ul style="list-style:none;padding:0;">
+            <li style="margin-bottom:0.75rem;color:var(--text2);"><strong>Quadratic Memory:</strong> Attention is O(n²) → expensive for very long sequences</li>
+            <li style="margin-bottom:0.75rem;color:var(--text2);"><strong>Generate Slowly:</strong> Decoder is autoregressive, generates one token at a time</li>
+            <li style="margin-bottom:0.75rem;color:var(--text2);"><strong>Data Hungry:</strong> Needs vast amounts of training data</li>
+            <li style="margin-bottom:0.75rem;color:var(--text2);"><strong>Hallucinations:</strong> Can generate plausible-sounding false information</li>
+            <li style="color:var(--text2);"><strong>Inference Cost:</strong> Running large models is expensive (GPU/TPU required)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. FUTURE DIRECTIONS -->
+    <section id="future">
+      <h2 class="section-heading">The Future: What's Next?</h2>
+      <p>Transformers are evolving rapidly. Here's what researchers are exploring:</p>
+      
+      <div class="collapsible-section">
+        <div class="collapsible-header">
+          <span>🚀 Efficient Transformers</span>
+          <span class="icon">▶</span>
+        </div>
+        <div class="collapsible-content">
+          <div class="collapsible-inner">
+            <p><strong>Problem:</strong> O(n²) attention is too expensive for long documents.</p>
+            <p><strong>Solutions:</strong></p>
+            <ul style="margin-left:1.5rem;">
+              <li>Sparse attention: Only attend to nearby tokens</li>
+              <li>Linear attention: Approximate complexity with kernels</li>
+              <li>Flash Attention: Optimized GPU kernels</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="collapsible-section">
+        <div class="collapsible-header">
+          <span>🧠 Mixture of Experts (MoE)</span>
+          <span class="icon">▶</span>
+        </div>
+        <div class="collapsible-content">
+          <div class="collapsible-inner">
+            <p>Instead of one large network, use multiple specialized "expert" networks. A router decides which expert to use for each token.</p>
+            <p><strong>Benefit:</strong> Scale to trillions of parameters with same compute.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="collapsible-section">
+        <div class="collapsible-header">
+          <span>🔗 Multimodal Transformers</span>
+          <span class="icon">▶</span>
+        </div>
+        <div class="collapsible-content">
+          <div class="collapsible-inner">
+            <p>Process text, images, audio, and video together. Models like GPT-4V and LLaVA combine different modalities.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="collapsible-section">
+        <div class="collapsible-header">
+          <span>⚡ Retrieval-Augmented Generation</span>
+          <span class="icon">▶</span>
+        </div>
+        <div class="collapsible-content">
+          <div class="collapsible-inner">
+            <p>Combine Transformers with external knowledge bases. Retrieve relevant documents, then generate answer based on retrieved context.</p>
+            <p><strong>Benefit:</strong> Reduce hallucinations, add factual grounding.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12. CONCLUSION -->
+    <section id="conclusion">
+      <h2 class="section-heading">Conclusion: Why Transformers Win</h2>
+      <p>The Transformer architecture is revolutionary because it:</p>
+      <ol style="margin-left:1.5rem;margin-bottom:1.5rem;">
+        <li><strong>Parallelizes training:</strong> 100× faster than sequential RNNs</li>
+        <li><strong>Captures long-range dependencies:</strong> Self-attention scales to document-length contexts</li>
+        <li><strong>Transfers beautifully:</strong> Pre-trained models dominate downstream tasks</li>
+        <li><strong>Scales to intelligence:</strong> Bigger models → emergent capabilities</li>
+      </ol>
+      <p>From ChatGPT to image generation to protein folding (AlphaFold2), Transformers are now the foundation of cutting-edge AI. Understanding them is essential for anyone serious about AI.</p>
+
+      <div class="cta-box">
+        <h3>Ready to Build With Transformers?</h3>
+        <p>Join our ML Club workshops and learn to implement Transformers from scratch using PyTorch and Hugging Face. No prerequisites needed!</p>
+        <a href="../join.html" class="btn btn-white" style="margin-top:1rem;">Join ML Club, UU →</a>
+      </div>
+    </section>
+
+    <!-- REFERENCES -->
+    <section id="references">
+      <h2 class="section-heading">Further Reading & References</h2>
+      <ul style="margin-left:1.5rem;margin-bottom:1.5rem;">
+        <li><strong>"Attention Is All You Need"</strong> (Vaswani et al., 2017) — The original Transformer paper. <a href="https://arxiv.org/abs/1706.03762" target="_blank" style="color:var(--accent);">Read on arXiv</a></li>
+        <li><strong>"The Illustrated Transformer"</strong> by Jay Alammar — Outstanding visual explanation.</li>
+        <li><strong>Hugging Face Transformers Library</strong> — Production-ready code for 1000+ pre-trained models.</li>
+        <li><strong>Stanford CS224N</strong> — Free course on NLP with Transformers.</li>
+        <li><strong>"Understanding Deep Learning"</strong> by Simon J.D. Prince — Comprehensive textbook covering Transformers & modern deep learning.</li>
+      </ul>
+    </section>
+
+  </div>
+
+  <!-- ── SIDEBAR: TABLE OF CONTENTS ── -->
+  <aside class="article-sidebar" id="toc-container" style="display:none;">
+    <div class="toc-nav">
+      <h4>📑 Contents</h4>
+      <ul>
+        <li><a href="#introduction">Introduction</a></li>
+        <li><a href="#problem">The Problem</a></li>
+        <li><a href="#concepts">Core Concepts</a></li>
+        <li><a href="#multihead">Multi-Head Attention</a></li>
+        <li><a href="#architecture">Architecture</a></li>
+        <li><a href="#encoder-decoder">Encoder vs Decoder</a></li>
+        <li><a href="#positional">Positional Encoding</a></li>
+        <li><a href="#data-flow">Data Flow</a></li>
+        <li><a href="#applications">Applications</a></li>
+        <li><a href="#pros-cons">Pros & Cons</a></li>
+        <li><a href="#future">Future</a></li>
+        <li><a href="#conclusion">Conclusion</a></li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </div>
+  </aside>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="../index.html" class="nav-logo" style="text-decoration:none">
+        <div class="nav-logo-icon">
+          <img src="../assets/ml-club-logo-main.jpg" alt="ML Club Logo" class="logo-img">
+        </div>
+        <div class="nav-logo-text">
+          <span class="logo-main">ML Club, <span style="color:var(--accent)">UU</span></span>
+          <span class="logo-sub">Uttara University</span>
+        </div>
+      </a>
+      <p>Machine Learning Club, Uttara University — exploring AI and ML through education and community.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Learn</h4>
+      <ul>
+        <li><a href="../courses.html">Courses</a></li>
+        <li><a href="../blog.html">Blog</a></li>
+        <li><a href="../projects.html">Projects</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Community</h4>
+      <ul>
+        <li><a href="../event.html">Events</a></li>
+        <li><a href="../join.html">Join Us</a></li>
+        <li><a href="../about.html">About</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="https://www.facebook.com/uumlc">Facebook</a></li>
+        <li><a href="https://github.com/mlclubuu">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/company/machine-learning-club-uttara-university/">LinkedIn</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom" style="text-align:center; padding:20px 0; margin-top:20px; border-top:1px solid var(--border); font-size:14px;">
+    © 2026 Machine Learning Club, Uttara University.<br/>All rights reserved.
+  </div>
+</footer>
+
+<script src="../scripts.js"></script>
+<script>
+  // ── Article-specific scripts ──
+  
+  // Toggle Table of Contents
+  const tocBtn = document.getElementById('toggle-toc');
+  const tocContainer = document.getElementById('toc-container');
+  if (tocBtn && tocContainer) {
+    tocBtn.addEventListener('click', () => {
+      tocContainer.style.display = tocContainer.style.display === 'none' ? 'block' : 'none';
+      tocBtn.textContent = tocContainer.style.display === 'none' ? '📑 Show Contents' : '📑 Hide Contents';
+    });
+  }
+
+  // Collapsible sections
+  document.querySelectorAll('.collapsible-header').forEach(header => {
+    header.addEventListener('click', () => {
+      const content = header.nextElementSibling;
+      const isActive = header.classList.toggle('active');
+      content.classList.toggle('active');
+      if (isActive) {
+        content.style.maxHeight = content.scrollHeight + 'px';
+      } else {
+        content.style.maxHeight = '0';
+      }
+    });
+  });
+
+  // Smooth scroll for TOC links
+  document.querySelectorAll('.toc-nav a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Animate section headings on scroll
+  const observerOptions = { threshold: 0.05 };
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.animation = 'fadeUp 0.6s ease both';
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.section-heading').forEach(el => {
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
