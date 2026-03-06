@@ -254,14 +254,14 @@ nav {
   position: absolute; inset: 0;
   background: linear-gradient(0deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.15) 55%, transparent 100%);
 }
-.slide-caption { position: relative; z-index: 2; padding: 2.5rem; color: #fff; }
+.slide-caption { position: relative; z-index: 2; padding: clamp(1.5rem, 5vw, 2.5rem); color: #fff; }
 .slide-caption .slide-tag {
   display: inline-block; padding: 0.2rem 0.75rem; border-radius: 100px;
   background: var(--accent); font-size: 0.7rem; font-weight: 700;
   letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.75rem;
 }
-.slide-caption h3 { font-size: 1.6rem; font-weight: 900; margin-bottom: 0.3rem; }
-.slide-caption p  { font-size: 0.88rem; opacity: 0.82; }
+.slide-caption h3 { font-size: clamp(1.2rem, 4vw, 1.6rem); font-weight: 900; margin-bottom: 0.3rem; }
+.slide-caption p  { font-size: clamp(0.8rem, 3vw, 0.88rem); opacity: 0.82; }
 .slider-controls {
   display: flex; align-items: center; justify-content: space-between; margin-top: 1.5rem;
 }
@@ -384,6 +384,7 @@ tr:hover td { background: var(--surface2); }
   .footer-grid { grid-template-columns: 1fr; }
   .hero h1 { font-size: 2rem; }
   .slide { height: 280px; }
+  .slider-arrow { width: 40px; height: 40px; font-size: 0.9rem; }
 }
 
 
