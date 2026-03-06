@@ -35,7 +35,8 @@
     .team-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:1.5rem; }
     .team-card { background:var(--card-bg); border:1px solid var(--border); border-radius:14px; padding:1.5rem; text-align:center; transition:border-color 0.3s; }
     .team-card:hover { border-color:var(--accent); }
-    .team-avatar { width:64px; height:64px; border-radius:50%; margin:0 auto 1rem; display:flex; align-items:center; justify-content:center; font-size:1.4rem; font-weight:900; font-family:var(--font-head); }
+    .team-avatar { width:96px; height:96px; border-radius:50%; margin:0 auto 1rem; display:flex; align-items:center; justify-content:center; font-size:1.4rem; font-weight:900; font-family:var(--font-head); }
+    .team-avatar img { width:100%; height:100%; object-fit:cover; border-radius:50%; }
     .team-card h3 { font-size:0.92rem; font-weight:700; }
     .team-card .role { font-size:0.78rem; color:var(--accent); margin-top:0.2rem; }
     .team-card .dept { font-size:0.75rem; color:var(--muted); margin-top:0.15rem; }
@@ -100,17 +101,23 @@
   <div class="section-label">Leadership</div>
   <h2 class="section-title" style="margin-bottom:2rem">Executive Team 2026</h2>
   <div class="team-grid">
-    <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff"> <img src="assets/executive-members-photos/ml-club-logo-main.jpg" alt=""> </div><h3>Sojeb Sikder</h3><div class="role">President</div><div class="dept">CSE 4th Year</div></div>
+    <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff"> <img src="assets/executive-members-photos/sojeb-vai.png" alt=""> </div><h3>Sojeb Sikder</h3><div class="role">President</div><div class="dept">CSE 4th Year</div></div>
     <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,#6d28d9,#7c3aed);color:#fff"><img src="" alt=""></div><h3>Jahid Hassan</h3><div class="role">Vice President</div><div class="dept">CSE 3rd Year</div></div>
     <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,#0891b2,#0e7490);color:#fff"><img src="" alt=""></div><h3>Rabiul Islam Bimon</h3><div class="role">General Secretary</div><div class="dept">CSE 3rd Year</div></div>
     <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,#15803d,#166534);color:#fff"><img src="" alt=""></div><h3>Faysal Ahammed Joy</h3><div class="role">General Executive</div><div class="dept">CSE 2nd Year</div></div>
     <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,#be123c,#9f1239);color:#fff"><img src="" alt=""></div><h3>Sumaiya Islam</h3><div class="role">Treasurer</div><div class="dept">CSE 4th Year</div></div>
-    <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,#b8841e,#d69d2c);color:#fff"><img src="" alt=""></div><h3>Kamran Hossain Topu</h3><div class="role">Media Secretary</div><div class="dept">CSE 3rd Year</div></div>
+    <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,#b8841e,#d69d2c);color:#fff"><img src="assets/executive-members-photos/topu-vai.png" alt=""></div><h3>Kamran Hossain Topu</h3><div class="role">Media Secretary</div><div class="dept">CSE 3rd Year</div></div>
 
-     <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff"> <img src="" alt=""> </div><h3>Shafiul Alam Sagar</h3><div class="role">Executive Member</div><div class="dept">CSE 4th Year</div></div>
-    <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,#6d28d9,#7c3aed);color:#fff"><img src="assets/executive-members-photos/mahfujur.png" alt="" style="width: 100px; height: 100px;"></div><h3>Mahfujur Rahman</h3><div class="role">Executive Member</div><div class="dept">CSE 3rd Year</div></div>
-    <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,#0891b2,#0e7490);color:#fff"><img src="" alt=""></div><h3>Mahadi Hasan</h3><div class="role">Executive Member</div><div class="dept">CSE 3rd Year</div></div>
-      <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,#15803d,#166534);color:#fff"><img src="" alt=""></div><h3>Zakia Sultana</h3><div class="role">Executive Member</div><div class="dept">CSE 2nd Year</div></div>
+     <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff"> <img src="assets/executive-members-photos/sagor-vai.png" alt=""> </div><h3>Shafiul Alam Sagar</h3><div class="role">Executive Member</div><div class="dept">CSE 4th Year</div></div>
+    <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,#6d28d9,#7c3aed);color:#fff"><img src="assets/executive-members-photos/mahfujur.png" alt=""></div><h3>Mahfujur Rahman</h3><div class="role">Executive Member</div><div class="dept">CSE 3rd Year</div></div>
+    <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,#0891b2,#0e7490);color:#fff"><img src="assets/executive-members-photos/mahdi.png" alt="Mahadi Hasan"></div><h3>Mahadi Hasan</h3><div class="role">Executive Member</div><div class="dept">CSE 3rd Year</div></div>
+      <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,#15803d,#166534);color:#fff"><img src="assets/executive-members-photos/zakia.png" alt=""></div><h3>Zakia Sultana</h3><div class="role">Executive Member</div><div class="dept">CSE 2nd Year</div></div>
+    <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,#be123c,#9f1239);color:#fff"><img src="assets/executive-members-photos/shameha.png" alt=""></div><h3>Shameha Binte Zaman</h3><div class="role">Executive Member</div><div class="dept">CSE 4th Year</div></div>
+    <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,#b8841e,#d69d2c);color:#fff"><img src="assets/executive-members-photos/aniaka-anu.png" alt=""></div><h3>Anika Anu</h3><div class="role">Executive Member</div><div class="dept">CSE 3rd Year</div></div>
+
+     <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,#6d28d9,#7c3aed);color:#fff"><img src="assets/executive-members-photos/parvez.png" alt=""></div><h3>Parvez Rahman</h3><div class="role">Sub-Executive Member</div><div class="dept">CSE 3rd Year</div></div>
+    <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,#0891b2,#0e7490);color:#fff"><img src="assets/executive-members-photos/lili.png" alt=""></div><h3>Nusrat Jahan Lili</h3><div class="role">Executive Member</div><div class="dept">CSE 3rd Year</div></div>
+      <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,#15803d,#166534);color:#fff"><img src="assets/executive-members-photos/maruf.png" alt=""></div><h3>Maruf Ahmed Siyam</h3><div class="role">Sub-Executive Member</div><div class="dept">CSE 2nd Year</div></div>
     <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,#be123c,#9f1239);color:#fff"><img src="" alt=""></div><h3>Shameha Binte Zaman</h3><div class="role">Executive Member</div><div class="dept">CSE 4th Year</div></div>
     <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,#b8841e,#d69d2c);color:#fff"><img src="" alt=""></div><h3>Anika Anu</h3><div class="role">Executive Member</div><div class="dept">CSE 3rd Year</div></div>
   </div>
