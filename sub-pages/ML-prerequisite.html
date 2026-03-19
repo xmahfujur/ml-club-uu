@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- favicon  -->
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/ml-favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/ml-favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/ml-favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="../site.webmanifest">
+
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ML Prerequisites & Tools | Machine Learning Club, Uttara University</title>
+  <link rel="stylesheet" href="../styles.css"/>
+  <style>
+    /* Prerequisites-specific styles */
+    .prereq-hero {
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      color: #fff;
+      padding: 4rem 2rem;
+      text-align: center;
+      margin-top: 0;
+    }
+    
+    .prereq-hero h1 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 900;
+      margin-bottom: 1rem;
+    }
+    
+    .prereq-hero p {
+      font-size: 1.1rem;
+      opacity: 0.95;
+      margin-bottom: 2rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .tool-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2.5rem 2rem;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+    
+    .tool-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-6px);
+      box-shadow: 0 12px 32px rgba(214, 157, 44, 0.15);
+    }
+    
+    .tool-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      margin: 0 auto 1.5rem;
+      color: #fff;
+    }
+    
+    .tool-name {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text1);
+      margin-bottom: 0.5rem;
+    }
+    
+    .tool-version {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+    
+    .tool-desc {
+      color: var(--text2);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+    
+    .tool-features {
+      list-style: none;
+      padding: 0;
+      text-align: left;
+    }
+    
+    .tool-features li {
+      padding: 0.5rem 0;
+      font-size: 0.85rem;
+      color: var(--text2);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .tool-features li:last-child {
+      border-bottom: none;
+    }
+    
+    .tool-features li:before {
+      content: "→ ";
+      color: var(--accent);
+      font-weight: 700;
+      margin-right: 0.5rem;
+    }
+    
+    .prerequisites-section {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2.5rem;
+      margin: 3rem 0;
+    }
+    
+    .prerequisites-section h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: var(--text1);
+    }
+    
+    .prereq-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    
+    .prereq-item {
+      padding: 1.5rem;
+      background: var(--surface2);
+      border-left: 4px solid var(--accent);
+      border-radius: 8px;
+    }
+    
+    .prereq-item-title {
+      font-weight: 700;
+      color: var(--text1);
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+    
+    .prereq-item-desc {
+      font-size: 0.85rem;
+      color: var(--text2);
+      line-height: 1.5;
+    }
+    
+    .cta-band {
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      padding: 4rem 3rem;
+      text-align: center;
+      margin: 3rem 0;
+    }
+    
+    .cta-band h2 {
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 0.75rem;
+    }
+    
+    .cta-band p {
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+    }
+    
+    .cta-band .btn-white {
+      background: #fff;
+      color: var(--accent-dark);
+    }
+    
+    .cta-band .btn-white:hover {
+      background: var(--bg2);
+      color: var(--accent-dark);
+    }
+    
+    .prereq-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="../index.html" class="nav-logo">
+    <div class="nav-logo-icon">
+      <img src="../assets/ml-club-logo-main.jpg" alt="ML Club Logo" class="logo-img">
+    </div>
+    <div class="nav-logo-text">
+      <span class="logo-main">Machine Learning Club, <span style="color:var(--accent)">UU</span></span>
+      <span class="logo-sub">Uttara University</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../courses.html" class="active">Courses</a></li>
+    <li><a href="../blog.html">Blog</a></li>
+    <li><a href="../event.html">Events</a></li>
+    <li><a href="../projects.html">Projects</a></li>
+    <li><a href="../about.html">About</a></li>
+    <li><a href="../certificate.html">Verify Certificate</a></li>
+    <li><a href="../join.html" class="nav-cta">Join the Club</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="theme-toggle" title="Toggle theme">🌙</button>
+    <div class="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="prereq-hero">
+  <h1>ML Tools & Prerequisites</h1>
+  <p>Learn all the essential Python libraries and tools we teach in our Machine Learning courses</p>
+</section>
+
+<!-- ── MAIN CONTENT ── -->
+<div class="prereq-content">
+  
+  <!-- Overview -->
+  <section class="section">
+    <div class="section-label">Tools We Teach</div>
+    <h2 class="section-title">Core Libraries & Technologies</h2>
+    <p class="section-sub">Master the industry-standard tools and libraries used by machine learning professionals around the world.</p>
+    
+    <!-- Tools Grid -->
+    <div class="tools-grid">
+      
+      <!-- Python -->
+      <div class="tool-card">
+        <div class="tool-icon">🐍</div>
+        <div class="tool-name">Python</div>
+        <div class="tool-version">3.8+</div>
+        <p class="tool-desc">The most popular programming language for data science and machine learning with an extensive ecosystem.</p>
+        <ul class="tool-features">
+          <li>Easy to learn and read</li>
+          <li>Rich ML libraries</li>
+          <li>Strong community support</li>
+          <li>Cross-platform compatible</li>
+          <li>Industry standard</li>
+        </ul>
+      </div>
+      
+      <!-- NumPy -->
+      <div class="tool-card">
+        <div class="tool-icon">📊</div>
+        <div class="tool-name">NumPy</div>
+        <div class="tool-version">1.20+</div>
+        <p class="tool-desc">Fundamental package for numerical computing with support for arrays and matrices with mathematical functions.</p>
+        <ul class="tool-features">
+          <li>N-dimensional arrays</li>
+          <li>Linear algebra operations</li>
+          <li>Fourier transforms</li>
+          <li>Broadcasting capabilities</li>
+          <li>High performance</li>
+        </ul>
+      </div>
+      
+      <!-- Pandas -->
+      <div class="tool-card">
+        <div class="tool-icon">🐼</div>
+        <div class="tool-name">Pandas</div>
+        <div class="tool-version">1.2+</div>
+        <p class="tool-desc">Powerful data manipulation and analysis library with DataFrames for handling structured data.</p>
+        <ul class="tool-features">
+          <li>DataFrames & Series</li>
+          <li>Data cleaning & transformation</li>
+          <li>Merging & joining data</li>
+          <li>Aggregation & grouping</li>
+          <li>CSV/Excel support</li>
+        </ul>
+      </div>
+      
+      <!-- Matplotlib -->
+      <div class="tool-card">
+        <div class="tool-icon">📈</div>
+        <div class="tool-name">Matplotlib</div>
+        <div class="tool-version">3.3+</div>
+        <p class="tool-desc">Comprehensive 2D plotting library for creating static, animated, and interactive visualizations.</p>
+        <ul class="tool-features">
+          <li>Line plots & scatter</li>
+          <li>Histograms & bar charts</li>
+          <li>Customizable styles</li>
+          <li>Publication-quality plots</li>
+          <li>Multi-figure support</li>
+        </ul>
+      </div>
+      
+      <!-- Seaborn -->
+      <div class="tool-card">
+        <div class="tool-icon">🎨</div>
+        <div class="tool-name">Seaborn</div>
+        <div class="tool-version">0.11+</div>
+        <p class="tool-desc">Statistical data visualization library built on Matplotlib for elegant and informative graphics.</p>
+        <ul class="tool-features">
+          <li>Statistical plots</li>
+          <li>Distribution visualizations</li>
+          <li>Heatmaps & correlations</li>
+          <li>Beautiful themes</li>
+          <li>Pandas integration</li>
+        </ul>
+      </div>
+      
+      <!-- Scikit-learn -->
+      <div class="tool-card">
+        <div class="tool-icon">🤖</div>
+        <div class="tool-name">Scikit-learn</div>
+        <div class="tool-version">0.24+</div>
+        <p class="tool-desc">Machine learning library with simple and efficient tools for data analysis and modeling.</p>
+        <ul class="tool-features">
+          <li>Classification & regression</li>
+          <li>Clustering algorithms</li>
+          <li>Feature selection</li>
+          <li>Model evaluation</li>
+          <li>Hyperparameter tuning</li>
+        </ul>
+      </div>
+      
+      <!-- TensorFlow -->
+      <div class="tool-card">
+        <div class="tool-icon">⚡</div>
+        <div class="tool-name">TensorFlow</div>
+        <div class="tool-version">2.5+</div>
+        <p class="tool-desc">Open-source machine learning framework for building deep learning models and neural networks.</p>
+        <ul class="tool-features">
+          <li>Neural networks</li>
+          <li>Deep learning models</li>
+          <li>GPU acceleration</li>
+          <li>Keras high-level API</li>
+          <li>Production deployment</li>
+        </ul>
+      </div>
+      
+      <!-- Keras -->
+      <div class="tool-card">
+        <div class="tool-icon">🧠</div>
+        <div class="tool-name">Keras</div>
+        <div class="tool-version">2.4+</div>
+        <p class="tool-desc">High-level neural networks API running on top of TensorFlow for easy model building.</p>
+        <ul class="tool-features">
+          <li>User-friendly API</li>
+          <li>Sequential models</li>
+          <li>Pre-trained models</li>
+          <li>Callbacks & monitoring</li>
+          <li>Multi-backend support</li>
+        </ul>
+      </div>
+      
+      <!-- Plotly -->
+      <div class="tool-card">
+        <div class="tool-icon">📉</div>
+        <div class="tool-name">Plotly</div>
+        <div class="tool-version">4.14+</div>
+        <p class="tool-desc">Interactive visualization library for creating engaging web-based interactive plots and dashboards.</p>
+        <ul class="tool-features">
+          <li>Interactive plots</li>
+          <li>3D visualizations</li>
+          <li>Web-based dashboards</li>
+          <li>Export options</li>
+          <li>Hover information</li>
+        </ul>
+      </div>
+      
+      <!-- Jupyter Notebook -->
+      <div class="tool-card">
+        <div class="tool-icon">📓</div>
+        <div class="tool-name">Jupyter Notebook</div>
+        <div class="tool-version">Latest</div>
+        <p class="tool-desc">Open-source web application for creating and sharing documents with live code, equations, and visualizations.</p>
+        <ul class="tool-features">
+          <li>Interactive coding</li>
+          <li>Live documentation</li>
+          <li>Rich media support</li>
+          <li>Markdown cells</li>
+          <li>Easy sharing</li>
+        </ul>
+      </div>
+      
+      <!-- Google Colab -->
+      <div class="tool-card">
+        <div class="tool-icon">☁️</div>
+        <div class="tool-name">Google Colab</div>
+        <div class="tool-version">Free GPU</div>
+        <p class="tool-desc">Free cloud-based Jupyter notebook environment with free GPU and TPU access for machine learning projects.</p>
+        <ul class="tool-features">
+          <li>Free GPU/TPU</li>
+          <li>No setup required</li>
+          <li>Cloud storage integration</li>
+          <li>Pre-installed libraries</li>
+          <li>Easy sharing & collaboration</li>
+        </ul>
+      </div>
+      
+      <!-- Hugging Face -->
+      <div class="tool-card">
+        <div class="tool-icon">🤗</div>
+        <div class="tool-name">Hugging Face</div>
+        <div class="tool-version">Latest</div>
+        <p class="tool-desc">The hub for state-of-the-art pre-trained models for NLP, computer vision, and other AI tasks.</p>
+        <ul class="tool-features">
+          <li>Pre-trained models</li>
+          <li>Transformers library</li>
+          <li>Fine-tuning with ease</li>
+          <li>Model hosting</li>
+          <li>Datasets & benchmarks</li>
+        </ul>
+      </div>
+      
+    </div>
+  </section>
+
+  <!-- Prerequisites Section -->
+  <section class="prerequisites-section">
+    <h3>📋 Prerequisites & Requirements</h3>
+    <p>Before starting our ML courses, ensure you have the following:</p>
+    
+    <div class="prereq-list">
+      <div class="prereq-item">
+        <div class="prereq-item-title">Basic Programming Knowledge</div>
+        <div class="prereq-item-desc">Familiarity with variables, loops, functions, and conditional statements in any programming language.</div>
+      </div>
+      
+      <div class="prereq-item">
+        <div class="prereq-item-title">Computer with Python Installed</div>
+        <div class="prereq-item-desc">Python 3.8 or higher installed with pip (Python package manager) for library installation.</div>
+      </div>
+      
+      <div class="prereq-item">
+        <div class="prereq-item-title">Basic Mathematics</div>
+        <div class="prereq-item-desc">Understanding of basic algebra, statistics, and linear algebra concepts is helpful but not required.</div>
+      </div>
+      
+      <div class="prereq-item">
+        <div class="prereq-item-title">Code Editor</div>
+        <div class="prereq-item-desc">VS Code, PyCharm, or any code editor of your choice for writing and executing Python code.</div>
+      </div>
+      
+      <div class="prereq-item">
+        <div class="prereq-item-title">Internet Connection</div>
+        <div class="prereq-item-desc">Reliable internet for accessing online resources, downloading libraries, and using cloud platforms.</div>
+      </div>
+      
+      <div class="prereq-item">
+        <div class="prereq-item-title">Curiosity & Dedication</div>
+        <div class="prereq-item-desc">A passionate mindset to learn, practice regularly, and work on real-world projects.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Installation Guide -->
+  <section class="section">
+    <div class="section-label">Getting Started</div>
+    <h2 class="section-title">Quick Installation Guide</h2>
+    <p class="section-sub">Installation is easy! Use pip or Anaconda to get started with our recommended tools.</p>
+    
+    <div class="card">
+      <h3>Install All ML Libraries at Once</h3>
+      <p style="font-family: 'Courier New', monospace; background: var(--surface2); padding: 1rem; border-radius: 8px; overflow-x: auto; color: var(--accent);">
+        pip install numpy pandas matplotlib seaborn scikit-learn tensorflow jupyter
+      </p>
+      <p style="margin-top: 1rem; color: var(--text2);">Or use Anaconda for easier package management:</p>
+      <p style="font-family: 'Courier New', monospace; background: var(--surface2); padding: 1rem; border-radius: 8px; overflow-x: auto; color: var(--accent);">
+        conda install numpy pandas matplotlib seaborn scikit-learn tensorflow jupyter
+      </p>
+    </div>
+  </section>
+
+</div>
+
+<!-- ── CTA BAND ── -->
+<div class="cta-band">
+  <h2>Ready to Learn?</h2>
+  <p>Join our courses and master these powerful tools for machine learning. Start your journey today!</p>
+  <a href="../join.html" class="btn btn-white">Get Started →</a>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="../index.html" class="nav-logo" style="text-decoration:none">
+        <div class="nav-logo-icon">
+        <img src="../assets/ml-club-logo-main.jpg" alt="ML Club Logo" class="logo-img">
+        </div>
+        <div class="nav-logo-text">
+          <span class="logo-main">ML Club, <span style="color:var(--accent)">UU</span></span>
+          <span class="logo-sub">Uttara University</span>
+        </div>
+      </a>
+      <p>Machine Learning Club, Uttara University. A student community advancing AI education in Bangladesh.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Learn</h4>
+      <ul>
+        <li><a href="../courses.html">Courses</a></li>
+        <li><a href="../projects.html">Projects</a></li>
+        <li><a href="../blog.html">Blog</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Community</h4>
+      <ul>
+        <li><a href="../event.html">Events</a></li>
+        <li><a href="../join.html">Join the Club</a></li>
+        <li><a href="../about.html">About Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="https://www.facebook.com/uumlc">Facebook</a></li>
+        <li><a href="https://www.linkedin.com/company/machine-learning-club-uttara-university/posts/?feedView=all">LinkedIn</a></li>
+        <li><a href="https://github.com/mlclubuu">GitHub</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-bottom" style="text-align:center; padding:20px 0; margin-top:20px; border-top:1px solid #ddd; font-size:14px;">
+  © 2026 Machine Learning Club, Uttara University.<br>
+  All rights reserved.
+</div>
+  </div>
+</footer>
+
+<script src="../scripts.js"></script>
+</body>
+</html>

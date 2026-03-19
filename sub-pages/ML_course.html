@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- favicon  -->
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/ml-favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/ml-favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/ml-favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="../site.webmanifest">
+
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ML Course Batch 2 | Machine Learning Club, Uttara University</title>
+  <link rel="stylesheet" href="../styles.css"/>
+  <style>
+    /* Course-specific styles */
+    .course-hero {
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      color: #fff;
+      padding: 4rem 2rem;
+      text-align: center;
+      margin-top: 0;
+    }
+    
+    .course-hero h1 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 900;
+      margin-bottom: 1rem;
+    }
+    
+    .course-hero p {
+      font-size: 1.1rem;
+      opacity: 0.95;
+      margin-bottom: 2rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .course-info {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 2rem;
+      font-size: 0.95rem;
+    }
+    
+    .course-info div {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .course-info strong {
+      font-weight: 700;
+    }
+    
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .module {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      transition: all 0.3s ease;
+    }
+    
+    .module:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(214, 157, 44, 0.1);
+    }
+    
+    .module-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    
+    .module-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: #fff;
+      font-weight: 800;
+    }
+    
+    .module-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text1);
+    }
+    
+    .module-desc {
+      color: var(--text2);
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+    
+    .module-topics {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .module-topics li {
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.88rem;
+      color: var(--text2);
+    }
+    
+    .module-topics li:last-child {
+      border-bottom: none;
+    }
+    
+    .module-topics li:before {
+      content: "✓ ";
+      color: var(--accent);
+      font-weight: 700;
+      margin-right: 0.5rem;
+    }
+    
+    .course-sidebar {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .course-sidebar h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: var(--text1);
+    }
+    
+    .sidebar-item {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .sidebar-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    
+    .sidebar-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.05em;
+    }
+    
+    .sidebar-value {
+      font-size: 0.95rem;
+      color: var(--text1);
+      font-weight: 600;
+    }
+    
+    .cta-band {
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      padding: 4rem 3rem;
+      text-align: center;
+      margin: 3rem 0;
+    }
+    
+    .cta-band h2 {
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 0.75rem;
+    }
+    
+    .cta-band p {
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+    }
+    
+    .cta-band .btn-white {
+      background: #fff;
+      color: var(--accent-dark);
+    }
+    
+    .cta-band .btn-white:hover {
+      background: var(--bg2);
+      color: var(--accent-dark);
+    }
+    
+    .course-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="../index.html" class="nav-logo">
+    <div class="nav-logo-icon">
+      <img src="../assets/ml-club-logo-main.jpg" alt="ML Club Logo" class="logo-img">
+    </div>
+    <div class="nav-logo-text">
+      <span class="logo-main">Machine Learning Club, <span style="color:var(--accent)">UU</span></span>
+      <span class="logo-sub">Uttara University</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../courses.html" class="active">Courses</a></li>
+    <li><a href="../blog.html">Blog</a></li>
+    <li><a href="../event.html">Events</a></li>
+    <li><a href="../projects.html">Projects</a></li>
+    <li><a href="../about.html">About</a></li>
+    <li><a href="../certificate.html">Verify Certificate</a></li>
+    <li><a href="../join.html" class="nav-cta">Join the Club</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="theme-toggle" title="Toggle theme">🌙</button>
+    <div class="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- ── COURSE HERO ── -->
+<section class="course-hero">
+  <h1>Machine Learning Course Batch 2</h1>
+  <p>Master the complete fundamentals of Machine Learning from data preprocessing to building production-ready models</p>
+  <div class="course-info">
+    <div><strong>Duration:</strong> 12 Weeks</div>
+    <div><strong>Level:</strong> Beginner to Intermediate</div>
+    <div><strong>Format:</strong> Hands-On Workshop</div>
+    <div><strong>Instructor:</strong> ML Club, UU</div>
+  </div>
+</section>
+
+<!-- ── COURSE CONTENT ── -->
+<div class="course-content">
+  
+  <!-- Overview -->
+  <section class="section">
+    <div class="section-label">Course Overview</div>
+    <h2 class="section-title">What you'll learn</h2>
+    <p class="section-sub">This comprehensive course covers all essential Machine Learning concepts, from theory to practical implementation using Python and popular ML libraries.</p>
+    
+    <!-- Course Modules -->
+    <div class="modules-grid">
+      
+      <!-- Module 1 -->
+      <div class="module">
+        <div class="module-header">
+          <div class="module-icon">1</div>
+          <div class="module-title">Python Fundamentals</div>
+        </div>
+        <p class="module-desc">Master Python programming essentials for machine learning development.</p>
+        <ul class="module-topics">
+          <li>Variables, Data Types & Operations</li>
+          <li>Control Flow (if, loops, functions)</li>
+          <li>Data Structures (lists, dictionaries, sets)</li>
+          <li>File I/O & Exception Handling</li>
+          <li>NumPy Basics</li>
+          <li>Practice Assignments</li>
+        </ul>
+      </div>
+      
+      <!-- Module 2 -->
+      <div class="module">
+        <div class="module-header">
+          <div class="module-icon">2</div>
+          <div class="module-title">Data Manipulation & Analysis</div>
+        </div>
+        <p class="module-desc">Learn to work with data using Pandas and prepare it for ML models.</p>
+        <ul class="module-topics">
+          <li>Pandas DataFrames & Series</li>
+          <li>Data Cleaning & Transformation</li>
+          <li>Handling Missing Values</li>
+          <li>Data Aggregation & Grouping</li>
+          <li>Merging & Joining Datasets</li>
+          <li>Real-world Dataset Project</li>
+        </ul>
+      </div>
+      
+      <!-- Module 3 -->
+      <div class="module">
+        <div class="module-header">
+          <div class="module-icon">3</div>
+          <div class="module-title">Data Visualization</div>
+        </div>
+        <p class="module-desc">Visualize data insights using Matplotlib, Seaborn, and Plotly.</p>
+        <ul class="module-topics">
+          <li>Matplotlib Basics & Customization</li>
+          <li>Seaborn Statistical Plots</li>
+          <li>Interactive Visualization with Plotly</li>
+          <li>Exploratory Data Analysis (EDA)</li>
+          <li>Dashboard Creation</li>
+          <li>Visualization Best Practices</li>
+        </ul>
+      </div>
+      
+      <!-- Module 4 -->
+      <div class="module">
+        <div class="module-header">
+          <div class="module-icon">4</div>
+          <div class="module-title">Data Preprocessing</div>
+        </div>
+        <p class="module-desc">Prepare data for machine learning models with proper preprocessing techniques.</p>
+        <ul class="module-topics">
+          <li>Feature Scaling & Normalization</li>
+          <li>Encoding Categorical Variables</li>
+          <li>Feature Engineering</li>
+          <li>Train-Test Splitting</li>
+          <li>Handling Imbalanced Datasets</li>
+          <li>Cross-Validation Techniques</li>
+        </ul>
+      </div>
+      
+      <!-- Module 5 -->
+      <div class="module">
+        <div class="module-header">
+          <div class="module-icon">5</div>
+          <div class="module-title">Supervised Learning: Regression</div>
+        </div>
+        <p class="module-desc">Build models to predict continuous values using regression algorithms.</p>
+        <ul class="module-topics">
+          <li>Linear Regression</li>
+          <li>Polynomial Regression</li>
+          <li>Ridge & Lasso Regression</li>
+          <li>Elastic Net</li>
+          <li>Model Evaluation Metrics</li>
+          <li>Real-world Regression Project</li>
+        </ul>
+      </div>
+      
+      <!-- Module 6 -->
+      <div class="module">
+        <div class="module-header">
+          <div class="module-icon">6</div>
+          <div class="module-title">Supervised Learning: Classification</div>
+        </div>
+        <p class="module-desc">Build classification models to predict categorical outcomes.</p>
+        <ul class="module-topics">
+          <li>Logistic Regression</li>
+          <li>Decision Trees</li>
+          <li>Random Forest</li>
+          <li>Support Vector Machines (SVM)</li>
+          <li>Naive Bayes</li>
+          <li>Classification Metrics & Evaluation</li>
+        </ul>
+      </div>
+      
+      <!-- Module 7 -->
+      <div class="module">
+        <div class="module-header">
+          <div class="module-icon">7</div>
+          <div class="module-title">Unsupervised Learning</div>
+        </div>
+        <p class="module-desc">Discover patterns in data without labeled responses.</p>
+        <ul class="module-topics">
+          <li>Clustering: K-Means & Hierarchical</li>
+          <li>DBSCAN & Density-based Methods</li>
+          <li>Dimensionality Reduction</li>
+          <li>Principal Component Analysis (PCA)</li>
+          <li>Anomaly Detection</li>
+          <li>Clustering Evaluation</li>
+        </ul>
+      </div>
+      
+      <!-- Module 8 -->
+      <div class="module">
+        <div class="module-header">
+          <div class="module-icon">8</div>
+          <div class="module-title">Ensemble Methods</div>
+        </div>
+        <p class="module-desc">Combine multiple models for better predictions and robustness.</p>
+        <ul class="module-topics">
+          <li>Bagging Techniques</li>
+          <li>Boosting (AdaBoost, Gradient Boosting)</li>
+          <li>XGBoost & LightGBM</li>
+          <li>Stacking & Voting</li>
+          <li>Hyperparameter Tuning</li>
+          <li>Ensemble Project</li>
+        </ul>
+      </div>
+      
+      <!-- Module 9 -->
+      <div class="module">
+        <div class="module-header">
+          <div class="module-icon">9</div>
+          <div class="module-title">Feature Selection & Engineering</div>
+        </div>
+        <p class="module-desc">Create and select the most relevant features for your models.</p>
+        <ul class="module-topics">
+          <li>Feature Importance Analysis</li>
+          <li>Correlation Methods</li>
+          <li>Statistical Tests</li>
+          <li>Recursive Feature Elimination</li>
+          <li>Creating New Features</li>
+          <li>Feature Selection Projects</li>
+        </ul>
+      </div>
+      
+      <!-- Module 10 -->
+      <div class="module">
+        <div class="module-header">
+          <div class="module-icon">10</div>
+          <div class="module-title">Model Evaluation & Validation</div>
+        </div>
+        <p class="module-desc">Properly evaluate and validate machine learning models.</p>
+        <ul class="module-topics">
+          <li>Confusion Matrix & ROC Curves</li>
+          <li>Precision, Recall & F1-Score</li>
+          <li>Cross-validation Strategies</li>
+          <li>Hyperparameter Tuning</li>
+          <li>Grid Search & Random Search</li>
+          <li>Avoiding Overfitting & Underfitting</li>
+        </ul>
+      </div>
+      
+      <!-- Module 11 -->
+      <div class="module">
+        <div class="module-header">
+          <div class="module-icon">11</div>
+          <div class="module-title">Introduction to Neural Networks</div>
+        </div>
+        <p class="module-desc">Explore neural networks and deep learning foundations using TensorFlow & Keras.</p>
+        <ul class="module-topics">
+          <li>Neural Network Basics</li>
+          <li>Activation Functions & Backpropagation</li>
+          <li>TensorFlow & Keras Introduction</li>
+          <li>Building Your First Neural Network</li>
+          <li>Convolutional Neural Networks (CNN)</li>
+          <li>Recurrent Neural Networks (RNN)</li>
+        </ul>
+      </div>
+      
+      <!-- Module 12 -->
+      <div class="module">
+        <div class="module-header">
+          <div class="module-icon">12</div>
+          <div class="module-title">Capstone Project & Deployment</div>
+        </div>
+        <p class="module-desc">Build an end-to-end ML project and learn to deploy your models.</p>
+        <ul class="module-topics">
+          <li>Project Planning & Scoping</li>
+          <li>Data Collection & Preparation</li>
+          <li>Model Development & Evaluation</li>
+          <li>Model Deployment with Flask/Streamlit</li>
+          <li>API Development</li>
+          <li>Project Showcase & Presentation</li>
+        </ul>
+      </div>
+      
+    </div>
+  </section>
+
+  <!-- Course Sidebar Info -->
+  <div class="course-sidebar">
+    <h3>Course Details</h3>
+    
+    <div class="sidebar-item">
+      <div class="sidebar-label">Start Date</div>
+      <div class="sidebar-value">March 2026</div>
+    </div>
+    
+    <div class="sidebar-item">
+      <div class="sidebar-label">Duration</div>
+      <div class="sidebar-value">12 Weeks (2 sessions/week)</div>
+    </div>
+    
+    <div class="sidebar-item">
+      <div class="sidebar-label">Prerequisites</div>
+      <div class="sidebar-value">Basic programming knowledge recommended</div>
+    </div>
+    
+    <div class="sidebar-item">
+      <div class="sidebar-label">Mode</div>
+      <div class="sidebar-value">Online + Offline Workshops</div>
+    </div>
+    
+    <div class="sidebar-item">
+      <div class="sidebar-label">Tools & Libraries</div>
+      <div class="sidebar-value">Python, NumPy, Pandas, Scikit-learn, TensorFlow, Keras</div>
+    </div>
+    
+    <div class="sidebar-item">
+      <div class="sidebar-label">Certification</div>
+      <div class="sidebar-value">Certificate of Completion with Project Portfolio</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── CTA BAND ── -->
+<div class="cta-band">
+  <h2>Join Batch 2 Today</h2>
+  <p>Spaces are limited. Enroll now and start your Machine Learning journey with us.</p>
+  <a href="../join.html" class="btn btn-white">Enroll in the Course →</a>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="../index.html" class="nav-logo" style="text-decoration:none">
+        <div class="nav-logo-icon">
+        <img src="../assets/ml-club-logo-main.jpg" alt="ML Club Logo" class="logo-img">
+        </div>
+        <div class="nav-logo-text">
+          <span class="logo-main">ML Club, <span style="color:var(--accent)">UU</span></span>
+          <span class="logo-sub">Uttara University</span>
+        </div>
+      </a>
+      <p>Machine Learning Club, Uttara University. A student community advancing AI education in Bangladesh.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Learn</h4>
+      <ul>
+        <li><a href="../courses.html">Courses</a></li>
+        <li><a href="../projects.html">Projects</a></li>
+        <li><a href="../blog.html">Blog</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Community</h4>
+      <ul>
+        <li><a href="../event.html">Events</a></li>
+        <li><a href="../join.html">Join the Club</a></li>
+        <li><a href="../about.html">About Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="https://www.facebook.com/uumlc">Facebook</a></li>
+        <li><a href="https://www.linkedin.com/company/machine-learning-club-uttara-university/posts/?feedView=all">LinkedIn</a></li>
+        <li><a href="https://github.com/mlclubuu">GitHub</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-bottom" style="text-align:center; padding:20px 0; margin-top:20px; border-top:1px solid #ddd; font-size:14px;">
+  © 2026 Machine Learning Club, Uttara University.<br>
+  All rights reserved.
+</div>
+  </div>
+</footer>
+
+<script src="../scripts.js"></script>
+</body>
+</html>
