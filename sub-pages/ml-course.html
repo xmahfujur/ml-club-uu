@@ -270,6 +270,16 @@
     .btn-join-animated:hover .btn-arrow {
       transform: translateX(4px);
     }
+
+    /* Testimonial styles */
+    .testimonial-wrap { display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:1.5rem; margin-top:2rem; }
+    .testimonial { background:var(--card-bg); border:1px solid var(--border); border-radius:16px; padding:2rem; transition:border-color 0.3s; }
+    .testimonial:hover { border-color:var(--accent); }
+    .testimonial p { font-size:0.88rem; color:var(--text2); font-style:italic; margin-bottom:1.2rem; line-height:1.75; }
+    .testi-author { display:flex; align-items:center; gap:0.75rem; }
+    .testi-avatar { width:42px; height:42px; border-radius:50%; background:var(--accent); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.85rem; color:#fff; }
+    .testi-name { font-size:0.87rem; font-weight:700; }
+    .testi-role { font-size:0.75rem; color:var(--muted); }
   </style>
 </head>
 <body>
@@ -630,6 +640,35 @@ Machine Learning
   </div>
 
 </div>
+
+<!-- ── TESTIMONIALS ── -->
+<section class="section" style="padding-top:0">
+  <div class="section-label">Batch 1 Success Stories</div>
+  <h2 class="section-title">What Our Graduates Say</h2>
+  <div class="testimonial-wrap">
+    <div class="testimonial">
+      <p>"I came into this course with basic Python knowledge, but the structured approach to regression and classification models completely transformed my understanding. Building a real house price prediction model in week 6 was a breakthrough moment. Now I can confidently approach any supervised learning problem!"</p>
+      <div class="testi-author">
+        <div class="testi-avatar">SK</div>
+        <div><div class="testi-name">Samia Khan</div><div class="testi-role">ID: 2231081245 | Batch 60 | CSE 2nd Year</div></div>
+      </div>
+    </div>
+    <div class="testimonial">
+      <p>"The hands-on projects in this course are incredible. From data preprocessing to feature engineering to model deployment - I learned the complete machine learning workflow. The K-means clustering project helped me understand unsupervised learning so well. I've already started my own portfolio projects!"</p>
+      <div class="testi-author">
+        <div class="testi-avatar">RH</div>
+        <div><div class="testi-name">Rifat Hassan</div><div class="testi-role">ID: 1241081265 | Batch 62 | CSE 3rd Year</div></div>
+      </div>
+    </div>
+    <div class="testimonial">
+      <p>"The best part about Batch 1 was how the instructors broke down complex algorithms into digestible concepts. Random Forest, SVM, Neural Networks - they all made sense! The model evaluation and validation techniques taught here are exactly what professional data scientists use. I'm very grateful!"</p>
+      <div class="testi-author">
+        <div class="testi-avatar">NK</div>
+        <div><div class="testi-name">Nusrat Khan</div><div class="testi-role">ID: 2441081278 | Batch 61 | CSE 2nd Year</div></div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ── CTA BAND ── -->
 <div class="cta-band">

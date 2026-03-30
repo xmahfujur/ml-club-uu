@@ -250,6 +250,15 @@
       transform: translateX(4px);
     }
 
+    /* Testimonial styles */
+    .testimonial-wrap { display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:1.5rem; margin-top:2rem; }
+    .testimonial { background:var(--card-bg); border:1px solid var(--border); border-radius:16px; padding:2rem; transition:border-color 0.3s; }
+    .testimonial:hover { border-color:var(--accent); }
+    .testimonial p { font-size:0.88rem; color:var(--text2); font-style:italic; margin-bottom:1.2rem; line-height:1.75; }
+    .testi-author { display:flex; align-items:center; gap:0.75rem; }
+    .testi-avatar { width:42px; height:42px; border-radius:50%; background:var(--accent); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.85rem; color:#fff; }
+    .testi-name { font-size:0.87rem; font-weight:700; }
+    .testi-role { font-size:0.75rem; color:var(--muted); }
   </style>
 </head>
 <body>
@@ -513,6 +522,35 @@
   <p>Join our courses and master these powerful tools for machine learning. Start your journey today!</p>
   <a href="https://forms.gle/a9ympiix1HwbYGPv6" class="btn btn-white">Enroll →</a>
 </div>
+
+<!-- ── TESTIMONIALS ── -->
+<section class="section" style="padding-top:0">
+  <div class="section-label">Batch 2 Success Stories</div>
+  <h2 class="section-title">Meet Our Python Graduates</h2>
+  <div class="testimonial-wrap">
+    <div class="testimonial">
+      <p>"I had zero programming experience before joining this batch, but the way the instructors taught Python fundamentals made everything click. Learning NumPy and Pandas transformed how I think about data. Now I can manipulate any dataset and create stunning visualizations with Matplotlib. Incredibly well-structured course!"</p>
+      <div class="testi-author">
+        <div class="testi-avatar">AR</div>
+        <div><div class="testi-name">Aarav Roy</div><div class="testi-role">ID: 2233081224 | Batch 63 | CSE 1st Year</div></div>
+      </div>
+    </div>
+    <div class="testimonial">
+      <p>"Python for Everyone Batch 2 was exactly what I needed. The progression from basic syntax to working with real datasets was logical and thorough. The Jupyter Notebook practical sessions in Google Colab made learning so accessible. I've already started contributing to small data analysis projects!"</p>
+      <div class="testi-author">
+        <div class="testi-avatar">ZA</div>
+        <div><div class="testi-name">Zara Ahmed</div><div class="testi-role">ID: 2241081225 | Batch 64 | CSE 2nd Year</div></div>
+      </div>
+    </div>
+    <div class="testimonial">
+      <p>"The comprehensive coverage of Python libraries was amazing. From data cleaning with Pandas to beautiful visualizations with Seaborn - I feel equipped to start the ML course with confidence. The instructors' real-world examples and assignments really pushed my understanding. Best prerequisite course ever!"</p>
+      <div class="testi-author">
+        <div class="testi-avatar">MJ</div>
+        <div><div class="testi-name">Mohammad Junaid</div><div class="testi-role">ID: 2251081226 | Batch 65 | CSE 1st Year</div></div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ── FOOTER ── -->
 <footer>
