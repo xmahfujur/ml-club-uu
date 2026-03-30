@@ -9,10 +9,29 @@
 
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ML Prerequisites</title>
+  <title>Python for Everyone</title>
   <link rel="stylesheet" href="../styles.css"/>
   <style>
     /* Prerequisites-specific styles */
+        .course-info {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 2rem;
+      font-size: 0.95rem;
+    }
+    
+    .course-info div {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .course-info strong {
+      font-weight: 700;
+    }
+    
     .prereq-hero {
       background: linear-gradient(135deg, var(--accent), var(--accent-dark));
       color: #fff;
@@ -193,6 +212,44 @@
       margin: 0 auto;
       padding: 3rem 2rem;
     }
+ .btn-join-animated {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      padding: 1rem 2rem;
+      border-radius: 999px;
+      background: #fff;
+      color: var(--accent-dark);
+      font-weight: 700;
+      text-decoration: none;
+      border: 1px solid var(--accent);
+      box-shadow: 0 10px 24px rgba(214, 157, 44, 0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, color 0.3s ease;
+      animation: pulse-soft 2.8s infinite ease-in-out;
+    }
+
+    @keyframes pulse-soft {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-2px); }
+    }
+
+    .btn-join-animated:hover {
+      background: var(--bg2);
+      color: var(--accent-dark);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 16px 38px rgba(214, 157, 44, 0.18);
+    }
+
+    .btn-join-animated .btn-arrow {
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    .btn-join-animated:hover .btn-arrow {
+      transform: translateX(4px);
+    }
+
   </style>
 </head>
 <body>
@@ -226,25 +283,34 @@
 
 <!-- ── HERO ── -->
 <section class="prereq-hero">
-  <h1>Machine Learning Prerequisites Course Batch - 3</h1>
-  <p>Learn all the essential Python libraries and tools we teach in our Machine Learning courses</p>
+  <h1>Python for Everyone Batch - 3</h1>
+  <p>Learn all the essential Python libraries and tools we teach in our Python for Everyone courses</p>
+   <div class="course-info">
+    <div><strong>Duration:</strong> 8 Weeks</div>
+    <div><strong>Level:</strong> Beginner</div>
+    <div><strong>Format:</strong> Hands On Workshop</div>
+    <div><strong>Instructor:</strong>MD. SHAFIUL ALAM SAGAR</div>
+  </div>
 </section>
 
 <!-- ── MAIN CONTENT ── -->
 <div class="prereq-content">
   
 <!-- ── CTA BAND ── -->
-<div class="cta-band">
-  <h2>ML Pre-requisite Batch-3</h2>
-  <p>Join our courses and master these powerful tools for machine learning. Start your journey today!</p>
+<!-- <div class="cta-band">
+  <h2>Python for Everyone Batch-3</h2>
+  <p>Join our courses and master these powerful tools for Python programming. Start your journey today!</p>
   <a href="../join.html" class="btn btn-white">Enroll →</a>
-</div>
+</div> -->
+ <div style="margin: 1.5rem 0 2rem; text-align: center;">
+    <a href="https://forms.gle/a9ympiix1HwbYGPv6" class="btn-join-animated" role="button">Enroll Now <span class="btn-arrow">→</span></a>
+  </div>
 
   <!-- Overview -->
   <section class="section">
     <div class="section-label">Course Outlines</div>
     <h2 class="section-title">What You'll Learn in This Course</h2>
-    <p class="section-sub">Master the industry standard tools and libraries used by machine learning professionals around the world.</p>
+    <p class="section-sub">Master the industry standard tools and libraries used by Python developers around the world.</p>
     
 
 
@@ -386,7 +452,7 @@
   <!-- Prerequisites Section -->
   <section class="prerequisites-section">
     <h3>Prerequisites & Requirements</h3>
-    <p>Before starting our ML courses, ensure you have the following:</p>
+    <p>Before starting our Python for Everyone courses, ensure you have the following:</p>
     
     <div class="prereq-list">
       <div class="prereq-item">
@@ -445,7 +511,7 @@
 <div class="cta-band">
   <h2>ML Pre-requisite Batch-3</h2>
   <p>Join our courses and master these powerful tools for machine learning. Start your journey today!</p>
-  <a href="../join.html" class="btn btn-white">Enroll →</a>
+  <a href="https://forms.gle/a9ympiix1HwbYGPv6" class="btn btn-white">Enroll →</a>
 </div>
 
 <!-- ── FOOTER ── -->
