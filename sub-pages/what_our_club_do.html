@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- favicon  -->
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/ml-favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/ml-favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/ml-favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="../site.webmanifest">
+
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>What Our Club Does - ML Club UU</title>
+  <link rel="stylesheet" href="../styles.css"/>
+  <style>
+    /* Club Activities Page Styles */
+    .club-hero {
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      color: #fff;
+      padding: 4rem 2rem;
+      text-align: center;
+      margin-top: 0;
+    }
+    
+    .club-hero h1 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 900;
+      margin-bottom: 1rem;
+    }
+    
+    .club-hero p {
+      font-size: 1.1rem;
+      opacity: 0.95;
+      margin-bottom: 1.5rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .club-hero-stats {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+    
+    .stat-box {
+      text-align: center;
+    }
+    
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 900;
+      margin-bottom: 0.3rem;
+    }
+    
+    .stat-label {
+      font-size: 0.85rem;
+      opacity: 0.85;
+      font-weight: 600;
+    }
+    
+    .activities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .activity-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2.5rem 2rem;
+      transition: all 0.3s ease;
+    }
+    
+    .activity-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-8px);
+      box-shadow: 0 12px 32px rgba(214, 157, 44, 0.12);
+    }
+    
+    .activity-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: #fff;
+      margin-bottom: 1.2rem;
+    }
+    
+    .activity-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text1);
+      margin-bottom: 0.8rem;
+    }
+    
+    .activity-desc {
+      color: var(--text2);
+      font-size: 0.9rem;
+      line-height: 1.7;
+      margin-bottom: 1.2rem;
+    }
+    
+    .activity-list {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .activity-list li {
+      padding: 0.5rem 0;
+      font-size: 0.85rem;
+      color: var(--text2);
+      padding-left: 1.5rem;
+      position: relative;
+    }
+    
+    .activity-list li:before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 900;
+    }
+    
+    .timeline-section {
+      margin: 3rem 0;
+    }
+    
+    .year-track {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    
+    .year-card {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      padding: 2rem;
+      transition: all 0.3s ease;
+    }
+    
+    .year-card:hover {
+      border-color: var(--accent);
+      background: var(--bg2);
+    }
+    
+    .year-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .year-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text1);
+      margin-bottom: 0.8rem;
+    }
+    
+    .year-card ul {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .year-card li {
+      font-size: 0.85rem;
+      color: var(--text2);
+      padding: 0.5rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+    
+    .year-card li:before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+    
+    .cta-section {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 3rem 2rem;
+      text-align: center;
+      margin: 3rem 0;
+    }
+    
+    .cta-section h2 {
+      font-size: 1.8rem;
+      font-weight: 900;
+      margin-bottom: 1rem;
+      color: var(--text1);
+    }
+    
+    .cta-section p {
+      color: var(--text2);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .contact-method {
+      text-align: center;
+    }
+    
+    .contact-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .contact-method h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+      color: var(--text1);
+    }
+    
+    .contact-method a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    
+    .contact-method a:hover {
+      text-decoration: underline;
+    }
+    
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .benefit-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 2rem;
+      transition: all 0.3s ease;
+    }
+    
+    .benefit-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+    
+    .benefit-emoji {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .benefit-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text1);
+      margin-bottom: 0.6rem;
+    }
+    
+    .benefit-card p {
+      color: var(--text2);
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+
+    .section-divider {
+      margin: 3rem 0;
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="../index.html" class="nav-logo">
+    <div class="nav-logo-icon">
+      <img src="../assets/ml-club-logo-main.jpg" alt="ML Club Logo" class="logo-img">
+    </div>
+    <div class="nav-logo-text">
+      <span class="logo-main">Machine Learning Club, <span style="color:var(--accent)">UU</span></span>
+      <span class="logo-sub">Uttara University</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../courses.html" class="active">Courses</a></li>
+    <li><a href="../blog.html">Blog</a></li>
+    <li><a href="../event.html">Events</a></li>
+    <li><a href="../projects.html">Projects</a></li>
+    <li><a href="../about.html">About</a></li>
+    <li><a href="../certificate.html">Verify Certificate</a></li>
+    <li><a href="../join.html" class="nav-cta">Join the Club</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="theme-toggle" title="Toggle theme">🌙</button>
+    <div class="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- ── HERO SECTION ── -->
+<section class="club-hero">
+  <h1>What Our Club Does</h1>
+  <p>Discover how Machine Learning Club, UU empowers students from every department with AI education, industry connections, and real-world projects.</p>
+  <div class="club-hero-stats">
+    <div class="stat-box">
+      <div class="stat-number">1000+</div>
+      <div class="stat-label">Active Members</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number">20+</div>
+      <div class="stat-label">Courses & Workshops</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number">100+</div>
+      <div class="stat-label">Project Graduates</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MAIN CONTENT ── -->
+<div class="course-content">
+
+  <!-- Core Activities -->
+  <section class="section">
+    <div class="section-label">Our Core Activities</div>
+    <h2 class="section-title">What We Offer Every Week</h2>
+    
+    <div class="activities-grid">
+      
+      <!-- Activity 1: Courses -->
+      <div class="activity-card">
+        <div class="activity-icon">📚</div>
+        <div class="activity-title">Hands-On Courses</div>
+        <p class="activity-desc">Structured learning paths from beginner to advanced, taught by experienced instructors and senior members.</p>
+        <ul class="activity-list">
+          <li>Machine Learning Fundamentals</li>
+          <li>Python for ML (Batch courses)</li>
+          <li>Data Science & Analysis</li>
+          <li>Deep Learning Basics</li>
+          <li>Project-based modules</li>
+          <li>Live doubt sessions</li>
+        </ul>
+      </div>
+      
+      <!-- Activity 2: Workshops -->
+      <div class="activity-card">
+        <div class="activity-icon">🛠️</div>
+        <div class="activity-title">Weekly Workshops</div>
+        <p class="activity-desc">Interactive sessions where you build real code and solve problems together with peers.</p>
+        <ul class="activity-list">
+          <li>Algorithm implementations</li>
+          <li>Dataset exploration</li>
+          <li>Model building & training</li>
+          <li>Code walkthrough sessions</li>
+          <li>Tool & library tutorials</li>
+          <li>Q&A with experts</li>
+        </ul>
+      </div>
+      
+      <!-- Activity 3: Events & Hackathons -->
+      <div class="activity-card">
+        <div class="activity-icon">🎯</div>
+        <div class="activity-title">Hackathons & Contests</div>
+        <p class="activity-desc">Compete, collaborate, and showcase your skills in our regular ML competitions and hackathons.</p>
+        <ul class="activity-list">
+          <li>Monthly ML competitions</li>
+          <li>Annual university hackathon</li>
+          <li>Problem-solving challenges</li>
+          <li>Team collaboration</li>
+          <li>Prizes & recognition</li>
+          <li>Portfolio building</li>
+        </ul>
+      </div>
+      
+      <!-- Activity 4: Projects -->
+      <div class="activity-card">
+        <div class="activity-icon">🚀</div>
+        <div class="activity-title">Real-World Projects</div>
+        <p class="activity-desc">Apply ML to solve actual problems affecting Bangladesh and showcase solutions to industry.</p>
+        <ul class="activity-list">
+          <li>Agriculture ML solutions</li>
+          <li>Healthcare applications</li>
+          <li>Smart city innovations</li>
+          <li>Financial predictions</li>
+          <li>Environmental monitoring</li>
+          <li>Published on GitHub</li>
+        </ul>
+      </div>
+      
+      <!-- Activity 5: Community & Mentoring -->
+      <div class="activity-card">
+        <div class="activity-icon">👥</div>
+        <div class="activity-title">Community & Mentoring</div>
+        <p class="activity-desc">A supportive network where senior members mentor newcomers and we grow together.</p>
+        <ul class="activity-list">
+          <li>One-on-one mentorship</li>
+          <li>Peer learning groups</li>
+          <li>Study circles</li>
+          <li>Career guidance</li>
+          <li>Industry connections</li>
+          <li>Social events</li>
+        </ul>
+      </div>
+      
+      <!-- Activity 6: Resources & Blog -->
+      <div class="activity-card">
+        <div class="activity-icon">📖</div>
+        <div class="activity-title">Learning Resources</div>
+        <p class="activity-desc">Free curated materials, tutorials, and documentation to support your learning journey.</p>
+        <ul class="activity-list">
+          <li>Blog posts & articles</li>
+          <li>Code repositories</li>
+          <li>Tutorial videos</li>
+          <li>Cheat sheets</li>
+          <li>Study guides</li>
+          <li>Curated links & tools</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- Why Join -->
+  <section class="section">
+    <div class="section-label">Why Join Us?</div>
+    <h2 class="section-title">Benefits of Being a Member</h2>
+    <div class="benefit-grid">
+      
+      <div class="benefit-card">
+        <div class="benefit-emoji">🆓</div>
+        <h3>100% Free</h3>
+        <p>All courses, workshops, and resources are completely free. No hidden fees, no barriers.</p>
+      </div>
+      
+      <div class="benefit-card">
+        <div class="benefit-emoji">🎓</div>
+        <h3>Quality Education</h3>
+        <p>Learn from experienced instructors and industry professionals right at your university.</p>
+      </div>
+      
+      <div class="benefit-card">
+        <div class="benefit-emoji">🤝</div>
+        <h3>Build Your Network</h3>
+        <p>Connect with 1000+ students passionate about AI and ML from every department at UU.</p>
+      </div>
+      
+      <div class="benefit-card">
+        <div class="benefit-emoji">📜</div>
+        <h3>Get Certified</h3>
+        <p>Earn certificates of completion upon finishing courses, with your portfolio projects attached.</p>
+      </div>
+      
+      <div class="benefit-card">
+        <div class="benefit-emoji">💼</div>
+        <h3>Career Opportunities</h3>
+        <p>Access internship & job opportunities through our industry connections and alumni network.</p>
+      </div>
+      
+      <div class="benefit-card">
+        <div class="benefit-emoji">🏆</div>
+        <h3>Build Your Portfolio</h3>
+        <p>Work on real projects and public repositories that impress employers and academics.</p>
+      </div>
+      
+      <div class="benefit-card">
+        <div class="benefit-emoji">🌍</div>
+        <h3>Make Local Impact</h3>
+        <p>Apply ML to solve real problems in Bangladesh and contribute to social good.</p>
+      </div>
+      
+      <div class="benefit-card">
+        <div class="benefit-emoji">📚</div>
+        <h3>Learn Any Time</h3>
+        <p>Missed a session? Access recorded materials and self-paced learning resources anytime.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- Timeline / What's Happening -->
+  <section class="section">
+    <div class="section-label">Our Activity Schedule</div>
+    <h2 class="section-title">What Happens Throughout the Year</h2>
+    
+    <div class="year-track">
+      <div class="year-card">
+        <div class="year-title">January - March</div>
+        <h3>New Batch Starts</h3>
+        <ul>
+          <li>Orientation for new members</li>
+          <li>Python fundamentals course begins</li>
+          <li>First workshop of the semester</li>
+          <li>Club recruitment drive</li>
+        </ul>
+      </div>
+      
+      <div class="year-card">
+        <div class="year-title">April - June</div>
+        <h3>Intensive Learning</h3>
+        <ul>
+          <li>Data science course in progress</li>
+          <li>Monthly hackathon (April)</li>
+          <li>Project brainstorming sessions</li>
+          <li>Mentor-mentee pairing</li>
+        </ul>
+      </div>
+      
+      <div class="year-card">
+        <div class="year-title">July - September</div>
+        <h3>Projects & Development</h3>
+        <ul>
+          <li>Real-world project work</li>
+          <li>Team collaboration sprint</li>
+          <li>Guest lectures from industry</li>
+          <li>AI workshop series</li>
+        </ul>
+      </div>
+      
+      <div class="year-card">
+        <div class="year-title">October - December</div>
+        <h3>Showcase & Celebration</h3>
+        <ul>
+          <li>Project presentations</li>
+          <li>Annual hackathon (November)</li>
+          <li>Certification ceremony</li>
+          <li>Year-end celebration</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- How to Join -->
+  <section class="section">
+    <div class="section-label">Getting Started</div>
+    <h2 class="section-title">How to Join ML Club, UU</h2>
+    
+    <div style="margin: 2rem 0; padding: 2rem; background: var(--card-bg); border-radius: 12px; border-left: 4px solid var(--accent);">
+      <h3 style="color: var(--text1); margin-bottom: 1rem;">It's simple and free! Follow these steps:</h3>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+        
+        <div style="padding: 1.5rem; background: var(--bg2); border-radius: 8px;">
+          <div style="font-size: 2rem; font-weight: 900; color: var(--accent); margin-bottom: 0.5rem;">1</div>
+          <h4 style="font-weight: 700; color: var(--text1); margin-bottom: 0.5rem;">Fill the Form</h4>
+          <p style="color: var(--text2); font-size: 0.85rem; line-height: 1.6;">Go to our <a href="../join.html" style="color: var(--accent); text-decoration: none; font-weight: 600;">Join the Club</a> page and submit the registration form.</p>
+        </div>
+        
+        <div style="padding: 1.5rem; background: var(--bg2); border-radius: 8px;">
+          <div style="font-size: 2rem; font-weight: 900; color: var(--accent); margin-bottom: 0.5rem;">2</div>
+          <h4 style="font-weight: 700; color: var(--text1); margin-bottom: 0.5rem;">Get Access</h4>
+          <p style="color: var(--text2); font-size: 0.85rem; line-height: 1.6;">You'll receive an email with links to our WhatsApp group, Facebook community, and GitHub organization.</p>
+        </div>
+        
+        <div style="padding: 1.5rem; background: var(--bg2); border-radius: 8px;">
+          <div style="font-size: 2rem; font-weight: 900; color: var(--accent); margin-bottom: 0.5rem;">3</div>
+          <h4 style="font-weight: 700; color: var(--text1); margin-bottom: 0.5rem;">Start Learning</h4>
+          <p style="color: var(--text2); font-size: 0.85rem; line-height: 1.6;">Choose a course, attend workshops, and start your ML journey with the community!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact & Connect -->
+  <section class="section">
+    <div class="cta-section">
+      <h2>Ready to Join Us?</h2>
+      <p>Whether you're a complete beginner or have some experience, there's a place for you in ML Club, UU. Let's learn and grow together!</p>
+      
+      <div style="margin-top: 2rem;">
+        <a href="../join.html" style="display: inline-block; padding: 1rem 2.5rem; background: linear-gradient(135deg, var(--accent), var(--accent-dark)); color: #fff; text-decoration: none; border-radius: 999px; font-weight: 700; margin-right: 1rem; margin-bottom: 1rem;">Join Now →</a>
+        <a href="../about.html" style="display: inline-block; padding: 1rem 2.5rem; background: var(--border); color: var(--text1); text-decoration: none; border-radius: 999px; font-weight: 700; margin-bottom: 1rem;">Learn More About Us →</a>
+      </div>
+      
+      <div class="contact-grid" style="margin-top: 3rem; border-top: 1px solid var(--border); padding-top: 2rem;">
+        <div class="contact-method">
+          <div class="contact-icon">📱</div>
+          <h3>WhatsApp</h3>
+          <p style="color: var(--text2); font-size: 0.85rem;">Join our active community group for daily discussions and updates.</p>
+          <a href="https://www.facebook.com/uumlc">Message Us →</a>
+        </div>
+        
+        <div class="contact-method">
+          <div class="contact-icon">🐙</div>
+          <h3>GitHub</h3>
+          <p style="color: var(--text2); font-size: 0.85rem;">Access our projects, code, and contribute to the community.</p>
+          <a href="https://github.com/mlclubuu">Visit GitHub →</a>
+        </div>
+        
+        <div class="contact-method">
+          <div class="contact-icon">📘</div>
+          <h3>Facebook</h3>
+          <p style="color: var(--text2); font-size: 0.85rem;">Follow us for announcements, event updates, and resources.</p>
+          <a href="https://www.facebook.com/uumlc">Follow Us →</a>
+        </div>
+        
+        <div class="contact-method">
+          <div class="contact-icon">💼</div>
+          <h3>LinkedIn</h3>
+          <p style="color: var(--text2); font-size: 0.85rem;">Connect with our alumni and industry professionals.</p>
+          <a href="https://www.linkedin.com/company/machine-learning-club-uttara-university/posts/?feedView=all">Connect →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="../index.html" class="nav-logo" style="text-decoration:none">
+        <div class="nav-logo-icon">
+          <img src="../assets/ml-club-logo-main.jpg" alt="ML Club Logo" class="logo-img">
+        </div>
+        <div class="nav-logo-text">
+          <span class="logo-main">ML Club, <span style="color:var(--accent)">UU</span></span>
+          <span class="logo-sub">Uttara University</span>
+        </div>
+      </a>
+      <p>Machine Learning Club, Uttara University. A student community advancing AI education in Bangladesh.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Learn</h4>
+      <ul>
+        <li><a href="../courses.html">Courses</a></li>
+        <li><a href="../projects.html">Projects</a></li>
+        <li><a href="../blog.html">Blog</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Community</h4>
+      <ul>
+        <li><a href="../event.html">Events</a></li>
+        <li><a href="../join.html">Join the Club</a></li>
+        <li><a href="../about.html">About Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="https://www.facebook.com/uumlc">Facebook</a></li>
+        <li><a href="https://www.linkedin.com/company/machine-learning-club-uttara-university/posts/?feedView=all">LinkedIn</a></li>
+        <li><a href="https://github.com/mlclubuu">GitHub</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-bottom" style="text-align:center; padding:20px 0; margin-top:20px; border-top:1px solid #ddd; font-size:14px;">
+      © 2026 Machine Learning Club, Uttara University.<br>
+      All rights reserved.
+    </div>
+  </div>
+</footer>
+
+<script src="../scripts.js"></script>
+</body>
+</html>
