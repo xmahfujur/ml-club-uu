@@ -33,8 +33,8 @@
     .value-card h3 { font-size:0.93rem; font-weight:700; margin-bottom:0.4rem; }
     .value-card p  { font-size:0.82rem; color:var(--muted); line-height:1.65; }
     .team-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:1.5rem; }
-    .team-card { background:var(--card-bg); border:1px solid var(--border); border-radius:14px; padding:1.5rem; text-align:center; transition:border-color 0.3s; }
-    .team-card:hover { border-color:var(--accent); }
+    .team-card { background:var(--card-bg); border:1px solid var(--border); border-radius:14px; padding:1.5rem; text-align:center; transition:all 0.3s ease; cursor:pointer; }
+    .team-card:hover { border-color:var(--accent); transform:translateY(-6px); box-shadow:var(--shadow); }
     .team-avatar { width:96px; height:96px; border-radius:50%; margin:0 auto 1rem; display:flex; align-items:center; justify-content:center; font-size:1.4rem; font-weight:900; font-family:var(--font-head); }
     .team-avatar img { width:100%; height:100%; object-fit:cover; border-radius:50%; }
     .team-card h3 { font-size:0.92rem; font-weight:700; }
@@ -100,7 +100,7 @@
   <hr class="divider" style="margin:4rem 0"/>
   <div class="section-label">Leadership</div>
   <h2 class="section-title" style="margin-bottom:2rem">Executive Team</h2>
-  <div class="team-grid">
+  <div id="team" class="team-grid" style="cursor: pointer;">
     <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff"> <img src="assets/executive-members-photos/sojeb-vai.png" alt=""> </div><h3>Sojeb Sikder</h3><div class="role">President</div><div class="dept">CSE 4th Year</div></div>
     <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,#0891b2,#0e7490);color:#fff"><img src="assets/executive-members-photos/rimon.png" alt=""></div><h3>Md Raisul Islam Rimon</h3><div class="role">General Secretary</div><div class="dept">CSE 4th Year</div></div>
     <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,#6d28d9,#7c3aed);color:#fff"><img src="assets/executive-members-photos/jahid.png" alt=""></div><h3>Jahid Hassan</h3><div class="role">Vice President</div><div class="dept">CSE 3rd Year</div></div>
@@ -160,5 +160,45 @@
 </div>
 </footer>
 <script src="scripts.js"></script>
+
+<!-- ── TEAM CARD NAVIGATION ── -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Member details mapping
+  const memberDetails = {
+    'Mahfujur Rahman': 'sub-pages/executive-details/Mahfujur-Rahman.html',
+    'Sojeb Sikder': 'sub-pages/executive-details/Sojeb-Sikder.html',
+    'Md Raisul Islam Rimon': 'sub-pages/executive-details/Md-Raisul-Islam-Rimon.html',
+    'Jahid Hassan': 'sub-pages/executive-details/Jahid-Hassan.html',
+    'Md Shafiul Alam Sagar': 'sub-pages/executive-details/Md-Shafiul-Alam-Sagar.html',
+    'Sumaiya Islam': 'sub-pages/executive-details/Sumaiya-Islam.html',
+    'Kamran Hossain Topu': 'sub-pages/executive-details/Kamran-Hossain-Topu.html',
+    'Mahadi Hasan': 'sub-pages/executive-details/Mahadi-Hasan.html',
+    'Zakiya Sultana': 'sub-pages/executive-details/Zakiya-Sultana.html',
+    'Shameha Binte Zaman': 'sub-pages/executive-details/Shameha-Binte-Zaman.html',
+    'Salehin Karim': 'sub-pages/executive-details/Salehin-Karim.html',
+    'Anika Anu': 'sub-pages/executive-details/Anika-Anu.html',
+    'Abdulla Al Biswas': 'sub-pages/executive-details/Abdulla-Al-Biswas.html',
+    'Dipto prethul': 'sub-pages/executive-details/Dipto-Prethul.html',
+    'Parvez Rahman': 'sub-pages/executive-details/Parvez-Rahman.html',
+    'Nusrat Jahan Lili': 'sub-pages/executive-details/Nusrat-Jahan-Lili.html',
+    'Maruf Ahmed Siyam': 'sub-pages/executive-details/Maruf-Ahmed-Siyam.html',
+    'Mohammad Sabbir Hossen': 'sub-pages/executive-details/Mohammad-Sabbir-Hossen.html'
+  };
+
+  // Add click handlers to team cards
+  document.querySelectorAll('.team-card').forEach(card => {
+    card.addEventListener('click', function() {
+      const memberName = this.querySelector('h3').textContent.trim();
+      const detailsPage = memberDetails[memberName];
+      
+      if (detailsPage) {
+        window.location.href = detailsPage;
+      }
+    });
+  });
+});
+</script>
+
 </body>
 </html>
